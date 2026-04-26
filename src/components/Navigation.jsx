@@ -1,4 +1,12 @@
-function Navigation() {
+function Navigation({ currentPage, setCurrentPage }) {
+    const links = [
+        { id: 'home', label: 'Home' },
+        { id: 'gospel', label: 'The Gospel' },
+        { id: 'books', label: 'Books of The Bible' },
+        { id: 'read', label: 'Read Scripture' },
+        { id: 'ask', label: 'Ask a Question' },
+    ]
+
     return (
         <nav className="nav">
             <div className="nav-brand">
@@ -6,11 +14,16 @@ function Navigation() {
                 <span className="nav-title">Jesus is the Way</span>
             </div>
             <ul className="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#gospel">The Gospel</a></li>
-                <li><a href="#books">Books of The Bible</a></li>
-                <li><a href="#read">Read Scripture</a></li>
-                <li><a href="#ask">Ask a Question</a></li>
+                {links.map(link => (
+                    <li key={link.id}>
+                        <button
+                            className={currentPage === link.id ? 'nav-active' : ''}
+                            onClick={() => setCurrentPage(link.id)}
+                        >
+                            {link.label}
+                        </button>
+                    </li>
+                ))}
             </ul>
         </nav>
     )

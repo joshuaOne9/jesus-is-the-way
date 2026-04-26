@@ -77,3 +77,46 @@
   color: #c9a84c;
   border-color: #c9a84c;
 }
+
+/* === Active nav link === */
+.nav-links button {
+  background: transparent;
+  color: #9a9080;
+  border: 1px solid transparent;
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-family: Georgia, serif;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.nav-links button:hover {
+  color: #c9a84c;
+  border-color: #c9a84c;
+}
+
+.nav-links button.nav-active {
+  background: #c9a84c;
+  color: #0b0b14;
+  font-weight: bold;
+}
+
+/* === Page placeholder === */
+.page-placeholder {
+  max-width: 700px;
+  margin: 100px auto 0;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.page-placholder h1 {
+  font-size: 36px;
+  margin-bottom: 16px;
+  color: #c9a84c;
+}
+
+.page-placholder p {
+  color: #c8c0b0;
+  font-size: 16px;
+}
