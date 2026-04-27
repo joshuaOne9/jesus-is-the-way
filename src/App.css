@@ -120,3 +120,184 @@
   color: #c8c0b0;
   font-size: 16px;
 }
+
+/* === Page (shared) === */
+.page {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 60px 24px 80px;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.page-eyebrow {
+  color: #c9a84c;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.page-header h1 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.page-divider {
+  width: 50px;
+  height: 2px;
+  background: #c9a84c;
+  margin: 0 auto 20px;
+}
+
+.page-intro {
+  font-size: 15px;
+  line-height: 1.95;
+  color: #c8c0b0;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* === Card (shared) === */
+.card {
+  background: #12121f;
+  border: 1px solid #2a2a40;
+  border-radius: 8px;
+  padding: 28px;
+  margin-bottom: 36px;
+}
+
+.card h2 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #c9a84c;
+  margin-bottom: 20px;
+}
+
+/* === Four Points === */
+.four-points {
+  border-left: 4px solid #c9a84c;
+  border-radius: 0 8px 8px 0;
+}
+
+.point {
+  margin-bottom: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #2a2a40;
+}
+
+.point:last-child {
+  border-bottom: none;
+}
+
+.point-title {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #f0ece4;
+}
+
+.point p {
+  color: #c8c0b0;
+  line-height: 1.85;
+  font-size: 14px;
+}
+
+.verse-callout {
+  margin-top: 16px;
+  padding: 16px 20px;
+  background: rgba(201, 168, 76, 0.08);
+  border-radius: 6px;
+  font-style: italic;
+  color: #c9a84c;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+/* === Teachings Grid === */
+.section-heading {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.teachings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 14px;
+  margin-bottom: 48px;
+}
+
+.teaching-card {
+  background: #12121f;
+  border: 1px solid #2a2a40;
+  border-radius: 8px;
+  padding: 18px;
+  transition: border-color 0.2s;
+}
+
+.teaching-card:hover {
+  border-color: #c9a84c;
+}
+
+.teaching-ref {
+  font-size: 11px;
+  color: #c9a84c;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+
+.teaching-card h3 {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.teaching-card p {
+  font-size: 13px;
+  color: #9a9080;
+  line-height: 1.75;
+}
+
+/* === Prayer === */
+.prayer-block {
+  text-align: center;
+  padding: 36px 24px;
+  background: rgba(201, 168, 76, 0.05);
+  border-radius: 8px;
+  border: 1px solid rgba(201, 168, 76, 0.2);
+}
+
+.prayer-block h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 14px;
+}
+
+.prayer-intro {
+  color: #9a9080;
+  line-height: 1.85;
+  max-width: 540px;
+  margin: 0 auto 20px;
+  font-size: 14px;
+}
+
+.prayer-card {
+  background: #12121f;
+  border: 1px solid #2a2a40;
+  border-left: 4px solid #c9a84c;
+  border-radius: 0 8px 8px 0;
+  padding: 22px;
+  text-align: left;
+  max-width: 540px;
+  margin: 0 auto;
+  font-style: italic;
+  line-height: 2.1;
+  color: #c8c0b0;
+  font-size: 14px;
+}
