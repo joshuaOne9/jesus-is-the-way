@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import Navigation from './components/Navigation'
 import Gospel from './components/Gospel'
+import Books from './components/Books'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home')
@@ -23,12 +24,7 @@ function App() {
 
   {currentPage === 'gospel' && <Gospel />}
 
-    {currentPage === 'books' && (
-      <div className="page-placeholder">
-        <h1>Books of The Bible</h1>
-        <p>Coming soon - an overview of each book related to The Bible.</p>
-      </div>
-    )}
+    {currentPage === 'books' && <Books />}
 
     {currentPage === 'read' && (
       <div className="page-placeholder">
