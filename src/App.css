@@ -470,3 +470,197 @@
   color: #9a9080;
   line-height: 1.6;
 }
+
+/* === Read Scripture === */
+.filter-label {
+  text-align: center;
+  font-size: 11px;
+  color: #5a5468;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.translation-row {
+  margin-bottom: 22px;
+}
+
+.translation-pills {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.translation-pills button {
+  padding: 6px 14px;
+  font-size: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: Georgia, serif;
+  background: transparent;
+  border: 1px solid #2a2a40;
+  color: #9a9080;
+  transition: all 0.2s;
+}
+
+.translation-pills button.translation-active {
+  background: #c9a84c;
+  color: #0b0b14;
+  border-color: transparent;
+  font-weight: bold;
+}
+
+.search-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  background: #12121f;
+  border: 1px solid #2a2a40;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 22px;
+}
+
+.reference-input {
+  flex: 1 1 220px;
+  background: #0b0b14;
+  border: 1px solid #2a2a40;
+  color: #f0ece4;
+  padding: 11px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: Georgia, serif;
+  outline: none;
+}
+
+.reference-input:focus {
+  border-color: #c9a84c;
+}
+
+.read-button {
+  background: #c9a84c;
+  color: #0b0b14;
+  border: none;
+  padding: 11px 22px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: Georgia, serif;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.read-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.popular-row {
+  margin-bottom: 28px;
+}
+
+.popular-pills {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.popular-pill {
+  font-size: 11px;
+  padding: 5px 11px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: Georgia, serif;
+  background: transparent;
+  border: 1px solid #2a2a40;
+  color: #9a9080;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.popular-pill:hover {
+  border-color: #c9a84c;
+  color: #c9a84c;
+}
+
+.status {
+  text-align: center;
+  color: #9a9080;
+  font-style: italic;
+  padding: 30px;
+}
+
+.error-card {
+  background: #12121f;
+  border: 1px solid #2a2a40;
+  border-left: 4px solid #8a2020;
+  border-radius: 0 8px 8px 0;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.error-card strong {
+  color: #e28080;
+  font-size: 13px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.error-card p {
+  color: #9a9080;
+  font-size: 13px;
+  line-height: 1.7;
+  margin-bottom: 6px;
+}
+
+.error-card .hint span {
+  color: #c9a84c;
+}
+
+.passage-card {
+  background: #12121f;
+  border: 1px solid #2a2a40;
+  border-left: 4px solid #c9a84c;
+  border-radius: 0 8px 8px 0;
+  padding: 32px;
+  margin-bottom: 24px;
+}
+
+.passage-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.passage-header h2 {
+  font-size: 22px;
+  font-weight: bold;
+  color: #c9a84c;
+}
+
+.passage-translation {
+  font-size: 11px;
+  color: #5a5468;
+  letter-spacing: 1px;
+}
+
+.passage-text {
+  line-height: 2;
+  font-size: 16px;
+  color: #e0d8c8;
+}
+
+.verse-num {
+  color: #c9a84c;
+  font-size: 11px;
+  font-weight: bold;
+  margin-right: 4px;
+}
+
+.hint span {
+  color: #c9a84c;
+}

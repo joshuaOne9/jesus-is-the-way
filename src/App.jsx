@@ -3,6 +3,7 @@ import './App.css'
 import Navigation from './components/Navigation'
 import Gospel from './components/Gospel'
 import Books from './components/Books'
+import Read from './components/Read'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home')
@@ -26,12 +27,7 @@ function App() {
 
     {currentPage === 'books' && <Books />}
 
-    {currentPage === 'read' && (
-      <div className="page-placeholder">
-        <h1>Read Scripture</h1>
-        <p>Coming soon - passage lookup with translation switcher.</p>
-      </div>
-    )}
+    {currentPage === 'read' && <Read />}
 
     {currentPage === 'ask' && (
       <div className="page-placeholder">
