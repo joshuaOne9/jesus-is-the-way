@@ -4,6 +4,7 @@ import Navigation from './components/Navigation'
 import Gospel from './components/Gospel'
 import Books from './components/Books'
 import Read from './components/Read'
+import Ask from './components/Ask'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home')
@@ -29,12 +30,7 @@ function App() {
 
     {currentPage === 'read' && <Read />}
 
-    {currentPage === 'ask' && (
-      <div className="page-placeholder">
-        <h1>Ask a Question</h1>
-        <p>Coming soon - AI powered biblical Q&A.</p>
-      </div>
-    )}
+    {currentPage === 'ask' && <Ask />}
   </>
   )
 }
