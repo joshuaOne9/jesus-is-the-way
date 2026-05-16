@@ -758,3 +758,28 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+/* === Mobile responsive nav === */
+@media (max-width: 640px) {
+  .nav {
+    flex-direction: colum;
+    height: auto;
+    padding: 12px 16px;
+    gap: 10px;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .nav-links button {
+    padding: 4px 9px;
+    font-size: 11px;
+  }
+
+  .nav-title {
+    font-size: 14px;
+  }
+}
