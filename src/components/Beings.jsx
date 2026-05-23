@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { BEINGS, CATEGORIES, CATEGORY_COLORS } from '../data/beings'
+import RealmGraph from './RealmGraph'
 
 function Beings() {
     const [category, setCategory] = useState('All')
     const [activeBeing, setActiveBeing] = useState(null)
+    const [viewMode, setViewMode] = useState('cards')
 
     const filtered = category === 'All'
         ? BEINGS
@@ -19,6 +21,24 @@ function Beings() {
                     Every divine being named in Scripture - the Watchers, the Elohim council, fallen angels, principalities, foreign gods, and the apocalyptic powers. Click any name to explore.
                 </p>
             </header>
+
+            <div className="view-toggle">
+                <button
+                    className={viewMode === 'cards' ? 'view-active' : ''}
+                    onClick={() => setViewMode('cards')}
+                >
+                    📚 Cards
+                </button>
+                <button
+                    className={viewMode === 'graph' ? 'view-active' : ''}
+                    onClick={() => setViewMode('graph')}
+                >
+                    🌐 Graph
+                </button>
+            </div>
+
+    {viewMode === 'cards' && (
+        <>
 
             <div className="genre-filter">
                 {['All', ...CATEGORIES].map((cat) => (
@@ -88,6 +108,10 @@ function Beings() {
                     )
                 })}
             </div>
+        </>
+    )}
+
+    {viewMode === 'graph' && <RealmGraph />}
         </section>
     )
 }

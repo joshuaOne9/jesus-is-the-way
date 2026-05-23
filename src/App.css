@@ -805,3 +805,34 @@
   border-left: 2px solid rgba(82, 49, 138, 0.45);
   margin-top: 4px;
 }
+
+.view-toggle {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 22px;
+}
+
+.view-toggle button {
+  padding: 8px 18px;
+  font-size: 13px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: Georgia, serif;
+  background: transparent;
+  border: 1px solid #2a2a40;
+  color: #9a9080;
+  transition: all 0.2s;
+}
+
+.view-toggle button:hover {
+  border-color: #c9a84c;
+  color: #c9a84c;
+}
+
+.view-toggle button.view-active {
+  background: #c9a84c;
+  color: #0b0b14;
+  border-color: transparent;
+  font-weight: bold;
+}
