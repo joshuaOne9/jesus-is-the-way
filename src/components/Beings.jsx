@@ -79,6 +79,9 @@ function Beings() {
 
                                     <div className="meta-label">SCRIPTURE REFERENCE</div>
                                     <p className="book-figures">{being.scripture.join(' · ')}</p>
+
+                                    <div className="meta-label modern-label">MODERN CORRELATIONS</div>
+                                    <p className="modern-correlations">{being.modernCorrelations}</p>
                                 </div>
                             )}
                         </div>

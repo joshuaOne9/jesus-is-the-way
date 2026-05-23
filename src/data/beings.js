@@ -7,6 +7,7 @@ export const BEINGS = [
     description: 'The chief leader of the 200 Watchers who descended on Mount Hermon. He led the conspiracy to take human wives, fathering the Nephilim. Bound in darkness until judgment.',
     scripture: ['1 Enoch 6:3-7', '1 Enoch 10:11-14', 'Genesis 6:1-4'],
     themes: ['Leadership', 'Forbidden Union', 'Bound for Judgment'],
+    modernCorrelations: 'The image of Shemyaza leading 200 angels in conspiracy on Mount Hermon has resonated throughout Western esoteric literature for centuries. Modern Christian fantasy and films like "Noah" (2014) draw heavily on the Watcher narrative. He appears in Romantic-era poetry following the 1773 rediscovery of 1 Enoch.',
   },
   {
     name: 'Azazel',
@@ -15,6 +16,7 @@ export const BEINGS = [
     description: 'The Watcher who taught humanity warfare, weapons-making, metallurgy, and cosmetics. His name became associated with the scapegoat ritual of Leviticus 16, where sin was symbolically sent into the wilderness to Azazel.',
     scripture: ['1 Enoch 8:1-2', '1 Enoch 10:4-8', 'Leviticus 16:8-10'],
     themes: ['Forbidden Knowledge', 'Warfare', 'Scapegoat'],
+    modernCorrelations: 'Azazel features prominently in Aleister Crowley\'s early 20th-century writings and in revivals of Enochian magic. The 18th-century rediscovery of 1 Enoch by James Bruce sparked interest among Romantic poets like Byron. Modern Western esotericism often portrays him as a Promethean figure — a giver of forbidden knowledge.',
   },
   {
     name: 'Penemue',
@@ -23,6 +25,7 @@ export const BEINGS = [
     description: 'The Watcher who taught humanity writing, ink, and paper — corrupting humanity by giving them the means to record sin. In Enochian tradition, literacy itself was a forbidden gift.',
     scripture: ['1 Enoch 69:8-11'],
     themes: ['Forbidden Knowledge', 'Writing', 'Corruption'],
+    modernCorrelations: 'Penemue\'s gift of writing has become a recurring theme in modern occult speculation about the spiritual costs of literacy. Theosophists and some Western esoteric orders link his teachings to the emergence of human civilization itself — knowledge bought at a cost.',
   },
   {
     name: 'Gadreel',
@@ -31,6 +34,7 @@ export const BEINGS = [
     description: 'The Watcher who led Eve astray in Eden, and later taught humans the making of swords, shields, and weapons of war. Some traditions identify him with the serpent of Genesis 3.',
     scripture: ['1 Enoch 69:6'],
     themes: ['Deception', 'Warfare', 'Original Sin'],
+    modernCorrelations: 'Gadreel\'s identification with the serpent of Eden in 1 Enoch has fascinated theologians and esoteric writers for centuries. He features in modern works seeking to bridge the Eden narrative with the Watcher mythology, including academic studies of Second Temple demonology.',
   },
   {
     name: 'Kasdeya',
@@ -39,6 +43,16 @@ export const BEINGS = [
     description: 'The Watcher who taught humans the smiting of spirits and demons, the smiting of embryos in the womb, and the demonic arts. Associated with the corruption of childbirth.',
     scripture: ['1 Enoch 69:12'],
     themes: ['Sorcery', 'Death of the Unborn', 'Hidden Arts'],
+    modernCorrelations: 'Kasdeya\'s role in teaching abortifacient and necromantic arts is studied in works on ancient near-eastern religion and on the gendered demonization of healing practices. The Watcher tradition broadly influences contemporary occult medicine discourse.',
+  },
+  {
+    name: 'Tamiel',
+    category: 'Watchers',
+    aka: ['Kasyade'],
+    description: 'One of the named chiefs of the Watchers in 1 Enoch, who taught humanity astrology and the reading of celestial signs. Part of the original conspiracy on Mount Hermon.',
+    scripture: ['1 Enoch 6:7', '1 Enoch 8:3'],
+    themes: ['Astrology', 'Forbidden Knowledge', 'Celestial Signs'],
+    modernCorrelations: 'Tamiel and the astrological Watchers are foundational to Hermetic astrology, Crowley\'s Liber 777 system, and modern occult astrology. The tension between divinely-ordained "wisdom of the stars" and "forbidden Watcher astrology" remains a live theological debate.',
   },
 
   // === Elohim Council ===
@@ -49,6 +63,7 @@ export const BEINGS = [
     description: 'The divine council presided over by the Most High God. In Psalm 82, God judges these elohim for their corruption of the nations. Each was assigned authority over the nations after Babel, while Yahweh kept Israel as His own portion.',
     scripture: ['Psalm 82:1-8', 'Deuteronomy 32:8-9', 'Job 1:6', '1 Kings 22:19-23'],
     themes: ['Divine Council', 'Corruption', 'Judgment'],
+    modernCorrelations: 'The "divine council" framework has gained renewed scholarly attention through Michael Heiser\'s "The Unseen Realm" and academic studies of Second Temple cosmology. This is reshaping how many evangelical and Reformed theologians approach Psalm 82 and Deuteronomy 32, particularly the "Deuteronomy 32 worldview."',
   },
   {
     name: 'The Adversary (ha-satan)',
@@ -57,6 +72,7 @@ export const BEINGS = [
     description: 'In Job and Zechariah, "the satan" is a title meaning "the accuser" — a member of the divine council whose role is to test, accuse, and prosecute. Not yet identified with the cosmic enemy of later tradition.',
     scripture: ['Job 1:6-12', 'Job 2:1-7', 'Zechariah 3:1-2', '1 Chronicles 21:1'],
     themes: ['Accuser', 'Testing', 'Heavenly Court'],
+    modernCorrelations: 'The transformation of "ha-satan" (the accuser) into Satan the cosmic enemy is traced in Elaine Pagels\' "The Origin of Satan" and modern academic theology. Many traditions wrestle with how "a member of the divine council" became "the personification of evil" — a development across Second Temple Judaism and early Christianity.',
   },
   {
     name: 'The Lying Spirit',
@@ -65,6 +81,16 @@ export const BEINGS = [
     description: 'In 1 Kings 22, the prophet Micaiah reveals a vision of God\'s council, where a spirit volunteers to be a "lying spirit" in the mouths of the false prophets to lure Ahab to his death. A striking glimpse of how God uses council members for judgment.',
     scripture: ['1 Kings 22:19-23', '2 Chronicles 18:18-22'],
     themes: ['Deception', 'Divine Judgment', 'Heavenly Court'],
+    modernCorrelations: '1 Kings 22 is foundational to theological discussions of divine sovereignty over deception. It is cited in modern theological works wrestling with the problem of evil, God\'s permission of false prophecy, and the boundaries between divine providence and moral responsibility.',
+  },
+  {
+    name: 'Belial',
+    category: 'Elohim Council',
+    aka: ['Beliar', 'The Worthless One'],
+    description: 'In the Dead Sea Scrolls, Belial is the chief opponent of God\'s people — leader of the "sons of darkness" against the "sons of light." Paul echoes this language in 2 Corinthians 6:15. The name means "worthless" or "without yoke."',
+    scripture: ['Deuteronomy 13:13', '2 Corinthians 6:15', 'Dead Sea Scrolls (War Scroll, Community Rule)'],
+    themes: ['Cosmic Enemy', 'Darkness', 'Lawlessness'],
+    modernCorrelations: 'Belial appears in medieval and Renaissance demonology (Lemegeton, Goetia) as one of the chief demonic kings. Anton LaVey\'s Church of Satan explicitly adopted Belial as one of its "Four Crown Princes of Hell." Modern Western occultism treats him as a major figure in the demonological hierarchy.',
   },
 
   // === Archangels ===
@@ -75,6 +101,7 @@ export const BEINGS = [
     description: 'The warrior archangel and prince of Israel. He contends with Satan over the body of Moses, fights the dragon in Revelation, and stands as protector of God\'s people. The only being explicitly called "archangel" in canonical Scripture.',
     scripture: ['Daniel 10:13', 'Daniel 12:1', 'Jude 9', 'Revelation 12:7'],
     themes: ['Warrior', 'Protector of Israel', 'Defeat of Satan'],
+    modernCorrelations: 'Michael remains one of the most depicted figures in Christian art and literature — from Milton\'s "Paradise Lost" to contemporary fiction. He is the patron of police, paramedics, and warriors in Catholic tradition. The Eastern Orthodox observe a major feast for him (the Synaxis of the Archangels). Cross-tradition: Mikha\'il in Islam is the angel of mercy and provision.',
   },
   {
     name: 'Gabriel',
@@ -83,6 +110,7 @@ export const BEINGS = [
     description: 'The messenger archangel who interprets visions to Daniel, announces John the Baptist\'s birth to Zechariah, and proclaims the Incarnation to Mary. His name means "strength of God."',
     scripture: ['Daniel 8:16', 'Daniel 9:21', 'Luke 1:11-20', 'Luke 1:26-38'],
     themes: ['Messenger', 'Annunciation', 'Revelation'],
+    modernCorrelations: 'Gabriel is central to Islamic tradition as well — Jibril delivers the Quran to Muhammad over 23 years. The Annunciation to Mary is depicted in countless masterpieces of Christian art (Botticelli, Da Vinci, Fra Angelico, El Greco). Modern Christmas iconography depends heavily on the Gabriel narrative.',
   },
   {
     name: 'Raphael',
@@ -91,6 +119,7 @@ export const BEINGS = [
     description: 'The healer archangel who walks with Tobias in the Book of Tobit, binds the demon Asmodeus, and heals Tobit\'s blindness. Named in deuterocanonical Scripture and Jewish tradition; venerated in Catholic and Orthodox traditions.',
     scripture: ['Tobit 3:17', 'Tobit 5:4', 'Tobit 12:15', '1 Enoch 20:3'],
     themes: ['Healing', 'Travel', 'Binding of Demons'],
+    modernCorrelations: 'Raphael features prominently in Catholic and Orthodox veneration, in Rembrandt\'s Tobit paintings, and in Western religious art. Modern Jewish and Christian angelologies treat him as the patron of healing professions and travelers. He is invoked in some hospital chaplaincies and pilgrim blessings.',
   },
   {
     name: 'Uriel',
@@ -99,6 +128,16 @@ export const BEINGS = [
     description: 'Named in Jewish apocalyptic tradition as one of the four chief angels who stand before God\'s throne. He guides Ezra through visions of the end and is associated with wisdom, prophecy, and the fires of divine judgment.',
     scripture: ['4 Esdras 4:1', '4 Esdras 5:20', '1 Enoch 20:2'],
     themes: ['Wisdom', 'Apocalypse', 'Divine Fire'],
+    modernCorrelations: 'Uriel appears extensively in modern angelology, popular spirituality, and New Age literature, often as the angel of wisdom, insight, or sudden illumination. His non-canonical status means his veneration is less universal — accepted in Eastern Orthodox but contested in Western Christian traditions since the 8th-century council removed him from formally venerated archangels.',
+  },
+  {
+    name: 'Metatron',
+    category: 'Archangels',
+    aka: ['The Lesser YHWH', 'Prince of the Presence'],
+    description: 'In Jewish mysticism, the highest of the angels — sometimes identified with the transformed Enoch, who "walked with God and was no more" (Genesis 5:24). 3 Enoch describes his enthronement as YHWH\'s vice-regent.',
+    scripture: ['Genesis 5:24', '3 Enoch (Sefer Hekhalot)'],
+    themes: ['Mystical Tradition', 'Enochic Transformation', 'Vice-Regent'],
+    modernCorrelations: 'Metatron has become a major figure in modern Kabbalah, the Hermetic Qabalah of the Golden Dawn, and contemporary angelology. He appears in popular culture (Kevin Smith\'s "Dogma," the "Supernatural" TV series, fantasy fiction) as one of the most powerful angels. Scholars study him as evidence of Jewish "two powers in heaven" theology debates.',
   },
 
   // === Named Demons ===
@@ -109,22 +148,25 @@ export const BEINGS = [
     description: 'Originally a Philistine deity worshipped at Ekron. By the New Testament era, "Beelzebub" had become a name for the prince of demons. Jesus is accused of casting out demons by his power; Jesus refutes this with the parable of the divided kingdom.',
     scripture: ['2 Kings 1:2-3', 'Matthew 12:24-27', 'Mark 3:22'],
     themes: ['Prince of Demons', 'Idolatry', 'Spiritual Warfare'],
+    modernCorrelations: 'Beelzebub appears in classical literature including Milton\'s "Paradise Lost" as a chief lieutenant of Satan. William Golding\'s "Lord of the Flies" (1954) takes its title from a direct translation of the name. In modern occult traditions including the Ars Goetia, he ranks as a prince of demons.',
   },
   {
     name: 'Asmodeus',
     category: 'Named Demons',
     aka: ['Aeshma'],
-    description: 'A demon of lust and destruction. In the Book of Tobit, he kills Sarah\'s seven successive husbands on their wedding nights until Raphael binds him in Egypt. Associated in tradition with rage and marital strife.',
+    description: 'A demon of lust and destruction. In the Book of Tobit, he kills Sarah\'s seven successive husbands on their wedding nights until Raphael binds him in Egypt.',
     scripture: ['Tobit 3:8', 'Tobit 8:3'],
     themes: ['Lust', 'Marriage', 'Bound by Angel'],
+    modernCorrelations: 'Asmodeus features prominently in medieval and Renaissance demonology, in the Lesser Key of Solomon as one of the 72 demons of the Ars Goetia, and in modern occultism. He appears in Anton LaVey\'s writings and in Dungeons & Dragons mythology as one of the most well-known demonic figures in contemporary fantasy.',
   },
   {
     name: 'Legion',
     category: 'Named Demons',
     aka: ['The Gerasene Demoniac\'s demons'],
-    description: 'A collective name given by a possessed man in the Gerasenes — "for we are many." Jesus casts them into a herd of swine, which rush into the sea. One of the most vivid encounters with the demonic in the Gospels.',
+    description: 'A collective name given by a possessed man in the Gerasenes — "for we are many." Jesus casts them into a herd of swine, which rush into the sea.',
     scripture: ['Mark 5:1-13', 'Luke 8:26-33', 'Matthew 8:28-32'],
     themes: ['Possession', 'Multitude', 'Deliverance'],
+    modernCorrelations: 'The Gerasene demoniac narrative has been one of the most discussed deliverance passages in Christian charismatic and Pentecostal traditions. It is also frequently invoked in modern dialogues between theology and psychiatry — the line between ancient demonology and modern dissociative conditions remains contested.',
   },
   {
     name: 'Mammon',
@@ -133,6 +175,34 @@ export const BEINGS = [
     description: 'Not a named demon in the strict sense, but Jesus personifies wealth as a rival god in the Sermon on the Mount: "You cannot serve both God and Mammon." Later tradition treated Mammon as a true demon of greed and avarice.',
     scripture: ['Matthew 6:24', 'Luke 16:9-13'],
     themes: ['Greed', 'Idolatry', 'Divided Allegiance'],
+    modernCorrelations: 'Mammon as a personified demon of greed entered Western imagination through Milton\'s "Paradise Lost." He remains a major literary figure in works examining capitalism, materialism, and economic critique. The "Mammon vs God" dichotomy is a foundational text for Christian ethics on wealth and stewardship.',
+  },
+  {
+    name: 'Lilith',
+    category: 'Named Demons',
+    aka: ['Adam\'s First Wife (rabbinic)', 'Night-Hag'],
+    description: 'Named in Isaiah 34:14 among the desolation-creatures of Edom. In rabbinic tradition and the Alphabet of Ben Sira, she becomes Adam\'s first wife who fled Eden refusing submission. Later Kabbalistic literature casts her as a queen of demons, associated with night and infant death.',
+    scripture: ['Isaiah 34:14', 'Alphabet of Ben Sira (medieval rabbinic)'],
+    themes: ['Night', 'Rebellion', 'Demonic Feminine'],
+    modernCorrelations: 'Lilith has become one of the most reclaimed figures in modern feminist spirituality, neo-paganism, and Wiccan traditions, often as a symbol of female autonomy. She appears extensively in modern literature, music (the Lilith Fair festival), and the occult. Her trajectory from rabbinic demon to modern feminist icon is one of the most studied reception histories.',
+  },
+  {
+    name: 'Abaddon',
+    category: 'Named Demons',
+    aka: ['Apollyon', 'The Destroyer'],
+    description: 'In Revelation 9, the king of the locust-creatures from the bottomless pit, whose Hebrew name is Abaddon ("destruction") and Greek name is Apollyon ("destroyer"). In Job, "Abaddon" appears as a personified place of destruction alongside Sheol.',
+    scripture: ['Revelation 9:11', 'Job 26:6', 'Job 28:22', 'Proverbs 15:11'],
+    themes: ['Destroyer', 'The Abyss', 'Locust Plague'],
+    modernCorrelations: 'John Bunyan\'s "Pilgrim\'s Progress" features Apollyon as the demon Christian fights in the Valley of Humiliation — one of the most famous depictions in English literature. In modern Western occult tradition, Abaddon ranks among the chief destroyer-spirits. Frequently appears in fantasy and apocalyptic fiction.',
+  },
+  {
+    name: 'Samael',
+    category: 'Named Demons',
+    aka: ['Poison of God', 'Angel of Death (rabbinic)'],
+    description: 'A major figure in Jewish mysticism — sometimes the chief of the satans, sometimes identified with the serpent of Eden, sometimes with the Angel of Death. His name means "poison/venom of God" — both a name and a description of his role as adversary.',
+    scripture: ['(rabbinic) Talmud Sotah 10b', 'Pirkei DeRabbi Eliezer', 'Zohar'],
+    themes: ['Angel of Death', 'Serpent', 'Dual Nature'],
+    modernCorrelations: 'Samael is central to Kabbalistic demonology and appears extensively in modern Western occultism, including Hermetic Order of the Golden Dawn material and Crowley\'s writings. His ambiguous nature — sometimes evil, sometimes a divinely-sanctioned executioner — makes him theologically complex in modern Jewish mystical revival.',
   },
 
   // === Foreign Gods ===
@@ -143,6 +213,7 @@ export const BEINGS = [
     description: 'The Canaanite storm god, chief rival of Yahweh throughout the Old Testament. Worshipped through fertility rites and child sacrifice in the worst forms. Elijah\'s confrontation with his prophets on Mount Carmel is one of Scripture\'s most dramatic showdowns.',
     scripture: ['1 Kings 18:20-40', 'Judges 6:25-32', 'Jeremiah 19:5'],
     themes: ['Idolatry', 'Storm/Fertility', 'Rival of Yahweh'],
+    modernCorrelations: 'The Yahweh-Baal struggle features in modern theology as a paradigm for spiritual conflict. Phoenician and Canaanite religion is seriously studied through the Ugaritic texts discovered in 1928. Small reconstructionist neopagan movements attempt revival of Phoenician traditions, though this remains a fringe academic-historical interest.',
   },
   {
     name: 'Molech',
@@ -151,6 +222,7 @@ export const BEINGS = [
     description: 'The Ammonite god to whom children were sacrificed by fire. The Law strictly forbids his worship. Israel\'s adoption of Molech worship is repeatedly condemned as one of the most grievous sins leading to exile.',
     scripture: ['Leviticus 18:21', 'Leviticus 20:1-5', '1 Kings 11:7', '2 Kings 23:10'],
     themes: ['Child Sacrifice', 'Abomination', 'Idolatry'],
+    modernCorrelations: 'Molech is invoked in modern pro-life rhetoric as a symbol of cultures that sacrifice children. The archaeology of the tophet — the sacrificial site at Carthage and elsewhere — continues to be debated in academic circles. Allen Ginsberg\'s "Howl" (1956) uses Moloch as the personification of devouring industrial modernity.',
   },
   {
     name: 'Asherah',
@@ -159,6 +231,7 @@ export const BEINGS = [
     description: 'The Canaanite mother goddess, consort of El and later of Baal. Worshipped through carved poles (asherim) and fertility rites. Repeatedly suppressed by Israel\'s reforming kings, only to return whenever the kingdom drifted.',
     scripture: ['Judges 6:25-26', '1 Kings 18:19', '2 Kings 23:4-7', 'Jeremiah 7:18'],
     themes: ['Fertility', 'Queen of Heaven', 'Persistent Idolatry'],
+    modernCorrelations: 'Archaeological discoveries — particularly the "Yahweh and his Asherah" inscriptions from Kuntillet Ajrud — have fueled both academic debate and modern religious feminism. Asherah has been reclaimed by some Wiccan and goddess-worship traditions as a symbol of divine femininity within an Abrahamic context.',
   },
   {
     name: 'Dagon',
@@ -167,6 +240,7 @@ export const BEINGS = [
     description: 'The chief god of the Philistines. When the captured Ark of the Covenant was placed in his temple, Dagon\'s statue fell prostrate before it and shattered. A vivid demonstration of Yahweh\'s supremacy over foreign deities.',
     scripture: ['1 Samuel 5:1-7', 'Judges 16:23'],
     themes: ['Philistine Deity', 'Fall Before the Ark', 'Defeated Idol'],
+    modernCorrelations: 'Dagon\'s defeat before the Ark is sometimes invoked in Christian preaching as a paradigm for God\'s supremacy over false religions. The figure also appears in H.P. Lovecraft\'s mythos as a primordial cosmic entity, though Lovecraft\'s Dagon bears little resemblance to the Philistine grain-and-fish deity.',
   },
   {
     name: 'Marduk',
@@ -175,6 +249,25 @@ export const BEINGS = [
     description: 'The chief god of Babylon, worshipped during Israel\'s exile. Isaiah and Jeremiah mock him as powerless beside Yahweh. The fall of Babylon is portrayed as the fall of Marduk himself.',
     scripture: ['Isaiah 46:1-2', 'Jeremiah 50:2', 'Jeremiah 51:44'],
     themes: ['Babylonian Empire', 'Defeated God', 'Imperial Idolatry'],
+    modernCorrelations: 'Marduk-and-Babylon imagery remains central to apocalyptic discourse. Modern academic study of the Enuma Elish (the Babylonian creation epic) has illuminated literary parallels and contrasts with Genesis 1. Some scholars argue Genesis was written specifically as a polemic against Marduk-theology.',
+  },
+  {
+    name: 'Tammuz',
+    category: 'Foreign Gods',
+    aka: ['Dumuzi (Sumerian)', 'Adonis (Greek parallel)'],
+    description: 'The dying-and-rising Mesopotamian god of vegetation and shepherds. In Ezekiel 8, the prophet sees women weeping for Tammuz at the gate of the Temple — one of the abominations precipitating the exile.',
+    scripture: ['Ezekiel 8:14'],
+    themes: ['Dying & Rising God', 'Pagan Mourning', 'Temple Defilement'],
+    modernCorrelations: 'James Frazer\'s "The Golden Bough" (1890) made Tammuz a foundational example in comparative religion\'s "dying god" archetype. Modern scholars actively debate whether dying-and-rising god patterns genuinely precede Christ or are projections of Christian categories onto ancient deities. The debate remains contested in both academic and popular discourse.',
+  },
+  {
+    name: 'Chemosh',
+    category: 'Foreign Gods',
+    aka: ['Kemosh (Moabite)'],
+    description: 'The chief god of Moab. King Mesha of Moab credits him with victories on the famous Mesha Stele (9th century BC) — one of the most important archaeological finds in biblical studies. Solomon built him a high place; Josiah destroyed it.',
+    scripture: ['Numbers 21:29', '1 Kings 11:7', '2 Kings 23:13', 'Jeremiah 48:7'],
+    themes: ['National God', 'Tribal Deity', 'Defeated by Yahweh'],
+    modernCorrelations: 'The Mesha Stele provides the earliest known extra-biblical reference to "Yahweh," making Chemosh-related archaeology highly significant in debates over biblical historicity. The artifact is studied in academic Near Eastern religion programs as a window into ancient Levantine cultic practice and the rhetoric of national gods.',
   },
 
   // === Apocalyptic Beings ===
@@ -182,17 +275,19 @@ export const BEINGS = [
     name: 'The Dragon',
     category: 'Apocalyptic Beings',
     aka: ['The Ancient Serpent', 'Satan', 'The Devil'],
-    description: 'The cosmic adversary revealed in fullness in Revelation. He pursues the woman who births the male child, wages war with Michael in heaven, and is cast down to earth. He empowers the Beast. Bound for a thousand years, then loosed for final defeat.',
+    description: 'The cosmic adversary revealed in fullness in Revelation. He pursues the woman who births the male child, wages war with Michael in heaven, and is cast down to earth. Bound for a thousand years, then loosed for final defeat.',
     scripture: ['Revelation 12:3-17', 'Revelation 20:1-3', 'Revelation 20:7-10'],
     themes: ['Cosmic Enemy', 'Defeat', 'Final Judgment'],
+    modernCorrelations: 'The Dragon imagery in Revelation has shaped every major Western tradition\'s view of cosmic evil. Modern literature (Tolkien\'s Smaug, Lewis\'s Tash, Martin\'s dragons) and apocalyptic fiction draw heavily on the figure. The "ancient serpent" identification connects Revelation directly back to Eden — a theological move with significant interpretive weight.',
   },
   {
     name: 'The Beast',
     category: 'Apocalyptic Beings',
     aka: ['The Antichrist (in some traditions)'],
-    description: 'Rising from the sea with ten horns and seven heads, the Beast is empowered by the Dragon to wage war against the saints. He demands worship from all the earth and his number is 666. His ultimate fate is the lake of fire.',
+    description: 'Rising from the sea with ten horns and seven heads, the Beast is empowered by the Dragon to wage war against the saints. He demands worship from all the earth and his number is 666.',
     scripture: ['Revelation 13:1-10', 'Revelation 17:7-14', 'Revelation 19:19-21'],
     themes: ['Imperial Power', 'Blasphemy', 'Final Defeat'],
+    modernCorrelations: 'The Beast and the number 666 have been polemically applied to many historical figures throughout Christian history. Each generation has tended to identify the Beast with its current crisis. The figure remains central to dispensationalist eschatology, modern prophecy conferences, and end-times media — though scholarly approaches favor the original Roman/Nero reading.',
   },
   {
     name: 'The False Prophet',
@@ -201,6 +296,25 @@ export const BEINGS = [
     description: 'A second beast with two horns like a lamb but speaking like a dragon. He performs deceptive signs, builds an image of the first Beast, and enforces its worship. Cast alive into the lake of fire with the Beast.',
     scripture: ['Revelation 13:11-18', 'Revelation 19:20'],
     themes: ['False Religion', 'Deceptive Signs', 'Mark of the Beast'],
+    modernCorrelations: 'Modern eschatological systems differ widely on the False Prophet\'s identification — from a coming world religious leader to corrupting media systems. The figure features in popular apocalyptic fiction (the "Left Behind" series, modern Christian films) and in serious theological discussion of false religion in the end times.',
+  },
+  {
+    name: 'The Whore of Babylon',
+    category: 'Apocalyptic Beings',
+    aka: ['Mystery, Babylon the Great', 'Mother of Harlots'],
+    description: 'In Revelation 17-18, John sees a woman riding a scarlet beast, drunk on the blood of saints, holding a golden cup of abominations. She is "Babylon the Great" — interpreted as Rome by most early Christians, and variously throughout history.',
+    scripture: ['Revelation 17:1-18', 'Revelation 18:1-24'],
+    themes: ['Corrupt Religion', 'Imperial Power', 'Final Judgment'],
+    modernCorrelations: 'Throughout history, the Whore of Babylon has been polemically identified with: the Roman Empire (early Church), the Roman Catholic Church (Reformation polemics), America (some modern preachers), and various political-religious systems. The figure remains a contested flashpoint in apocalyptic interpretation across denominations and traditions.',
+  },
+  {
+    name: 'The Four Living Creatures',
+    category: 'Other Divine Beings',
+    aka: ['The Chayot (Hebrew)', 'The Tetramorphs'],
+    description: 'Four-faced beings around God\'s throne in Ezekiel 1, 10 and Revelation 4. Each has the faces of a man, lion, ox, and eagle. They cry "Holy, holy, holy" continuously. In Christian tradition, they came to symbolize the four Gospels — Matthew (man), Mark (lion), Luke (ox), John (eagle).',
+    scripture: ['Ezekiel 1:5-14', 'Ezekiel 10:14', 'Revelation 4:6-9'],
+    themes: ['Throne Beings', 'Four Faces', 'Gospel Symbolism'],
+    modernCorrelations: 'The tetramorph symbolism remains central to Christian iconography, especially in Eastern Orthodox and Catholic traditions. The four creatures appear extensively in medieval illuminated manuscripts (the Book of Kells, the Lindisfarne Gospels) and modern religious art. They also feature in Western esoteric traditions as the four elemental forces.',
   },
 
   // === Principalities ===
@@ -211,6 +325,7 @@ export const BEINGS = [
     description: 'A territorial spirit who withstood the messenger angel sent to Daniel for twenty-one days, until Michael came to help. One of the clearest biblical glimpses of unseen spiritual hierarchy ruling over nations.',
     scripture: ['Daniel 10:12-13', 'Daniel 10:20'],
     themes: ['Territorial Spirit', 'Spiritual Warfare', 'Hidden Conflict'],
+    modernCorrelations: 'Daniel 10 has become a foundational text in modern charismatic and Pentecostal teachings on "spiritual warfare" — particularly in the works of C. Peter Wagner, John Eckhardt, and the strategic-level spiritual warfare movement of the 1990s-2010s. The concept of territorial spirits remains theologically debated across evangelical traditions.',
   },
   {
     name: 'Prince of Greece',
@@ -219,6 +334,16 @@ export const BEINGS = [
     description: 'Mentioned alongside the Prince of Persia in Daniel\'s vision. After Persia, Greece would rise — and its territorial prince with it. Daniel sees that earthly empires are mirrored by spiritual powers.',
     scripture: ['Daniel 10:20'],
     themes: ['Territorial Spirit', 'Coming Empire', 'Spiritual Hierarchy'],
+    modernCorrelations: 'Daniel\'s prediction of Greek dominance — and its territorial prince — is read prophetically as foreshadowing Alexander the Great\'s rise. The interplay of earthly empires and spiritual hierarchy has been deeply influential in Christian historicism, apocalyptic interpretation, and contemporary spiritual warfare theology.',
+  },
+  {
+    name: 'The Day-Star, Son of Dawn',
+    category: 'Principalities',
+    aka: ['Lucifer (Latin Vulgate)', 'Helel ben Shahar'],
+    description: 'In Isaiah 14, the prophet mocks the King of Babylon as a "shining one" (helel) cast down from heaven for saying "I will ascend above the stars of God." Traditionally read in Christian theology as referring to the prideful fall of Satan, especially after Jerome translated "helel" as "Lucifer" in the Latin Vulgate.',
+    scripture: ['Isaiah 14:12-15', 'Ezekiel 28:12-19 (parallel image)'],
+    themes: ['Pride and Fall', 'Lucifer Tradition', 'Cosmic Pride'],
+    modernCorrelations: 'Jerome\'s translation of "helel" as "Lucifer" became foundational to medieval Christian demonology and Milton\'s "Paradise Lost." Modern Luciferianism (distinct from LaVeyan Satanism) reclaims the figure as a symbol of enlightenment and rebellion against tyranny. The distinction between "Lucifer-the-fallen-archangel" and "Satan" varies sharply across traditions — many scholars argue Isaiah 14 was never about a fallen angel at all.',
   },
 
   // === Other Divine Beings ===
@@ -229,6 +354,7 @@ export const BEINGS = [
     description: 'A figure who appears throughout the Old Testament, speaking as God in the first person yet distinct from God. Encounters include Hagar, Abraham, Moses at the burning bush, and Gideon. Many Christian theologians identify him with the pre-incarnate Christ.',
     scripture: ['Genesis 16:7-13', 'Exodus 3:2-6', 'Judges 6:11-23', 'Zechariah 3:1-7'],
     themes: ['Theophany', 'Pre-incarnate Christ', 'Mystery'],
+    modernCorrelations: 'The "Christophany" interpretation of the Angel of the Lord — that he is the pre-incarnate Christ — is held strongly in evangelical and Reformed theology. Modern Trinitarian theology continues to engage with these Old Testament theophanies as preparation for the incarnation. Other traditions read these encounters as God-the-Father appearing through a created angelic agent.',
   },
   {
     name: 'Seraphim',
@@ -237,6 +363,7 @@ export const BEINGS = [
     description: 'Six-winged beings surrounding God\'s throne in Isaiah\'s vision. They cry "Holy, holy, holy" continuously. One purifies Isaiah\'s lips with a burning coal. Their name means "burning ones."',
     scripture: ['Isaiah 6:1-7', 'Revelation 4:8 (likely)'],
     themes: ['Worship', 'Purity', 'Divine Throne'],
+    modernCorrelations: 'The seraphim\'s cry "Holy, holy, holy" is foundational to Christian worship — used in the Sanctus of the Mass since the early Church. Their six wings and burning nature appear extensively in Christian iconography and modern depictions of heaven. The Trisagion hymn of Eastern Orthodox liturgy descends directly from this passage.',
   },
   {
     name: 'Cherubim',
@@ -245,6 +372,7 @@ export const BEINGS = [
     description: 'Four-faced, four-winged throne guardians described in dazzling detail by Ezekiel. They guard Eden after the fall, are gold-formed atop the Ark of the Covenant, and appear in Revelation around God\'s throne. Not the chubby winged babies of Renaissance art.',
     scripture: ['Genesis 3:24', 'Exodus 25:18-22', 'Ezekiel 1:4-28', 'Ezekiel 10', 'Revelation 4:6-8'],
     themes: ['Throne Guardians', 'Glory', 'Living Creatures'],
+    modernCorrelations: 'The popular Renaissance imagery of cherubim as winged baby angels (putti) is a complete distortion of biblical descriptions. Ezekiel\'s four-faced, four-winged cherubim have inspired countless theologians, esoteric writers, and artists from Blake to contemporary fantasy. Modern angelology often begins from this jarring contrast — biblical cherubim are terrifying, not cute.',
   },
 ]
 

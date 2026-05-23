@@ -790,3 +790,18 @@
   font-style: italic;
   margin-top: 2px;
 }
+
+.modern-label {
+  margin-top: 14px !important;
+}
+
+.modern-correlations {
+  font-size: 13px;
+  color: #c8c0b0;
+  line-height: 1.85;
+  padding: 12px 14px;
+  background: rgba(82, 49, 138, 0.08);
+  border-radius: 6px;
+  border-left: 2px solid rgba(82, 49, 138, 0.45);
+  margin-top: 4px;
+}
