@@ -783,3 +783,10 @@
     font-size: 14px;
   }
 }
+
+.being-aka {
+  font-size: 11px;
+  color: #9a9080;
+  font-style: italic;
+  margin-top: 2px;
+}

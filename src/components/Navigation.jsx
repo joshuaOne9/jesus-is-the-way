@@ -3,6 +3,7 @@ function Navigation({ currentPage, setCurrentPage }) {
         { id: 'home', label: 'Home' },
         { id: 'gospel', label: 'The Gospel' },
         { id: 'books', label: 'Books of The Bible' },
+        { id: 'spiritual-realm', label: 'The Spiritual Realm' },
         { id: 'read', label: 'Read Scripture' },
         { id: 'ask', label: 'Ask a Question' },
     ]

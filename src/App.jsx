@@ -5,6 +5,7 @@ import Gospel from './components/Gospel'
 import Books from './components/Books'
 import Read from './components/Read'
 import Ask from './components/Ask'
+import Beings from './components/Beings'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home')
@@ -29,6 +30,8 @@ function App() {
     {currentPage === 'books' && <Books />}
 
     {currentPage === 'read' && <Read />}
+
+    {currentPage === 'spiritual-realm' && <Beings />}
 
     {currentPage === 'ask' && <Ask />}
   </>
