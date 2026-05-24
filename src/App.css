@@ -836,3 +836,50 @@
   border-color: transparent;
   font-weight: bold;
 }
+
+.graph-detail-panel {
+  position: relative;
+  margin-top: 24px;
+  padding: 28px 32px;
+  background: rgba(202, 168, 76, 0.04);
+  border: 1px solid #2a2a40;
+  border-radius: 8px;
+}
+
+.close-detail {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: 1px solid #2a2a40;
+  color: #9a9080;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  font-family: Georgia, serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.close-detail:hover {
+  border-color: #c9a84c;
+  color: #c9a84c;
+}
+
+.detail-header {
+  margin-bottom: 20px;
+  padding-right: 50px;
+}
+
+.detail-name {
+  font-size: 28px;
+  color: #c9a84c;
+  margin: 10px 0 4px 0;
+  font-family: Georgia, serif;
+  font-weight: normal;
+}

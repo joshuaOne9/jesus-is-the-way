@@ -111,7 +111,55 @@ function Beings() {
         </>
     )}
 
-    {viewMode === 'graph' && <RealmGraph />}
+    {viewMode === 'graph' && (
+                <>
+                    <RealmGraph onBeingClick={setActiveBeing} />
+
+                    {activeBeing && (
+                        <div className="graph-detail-panel">
+                            <button
+                                className="close-detail"
+                                onClick={() => setActiveBeing(null)}
+                                aria-label="Close details"
+                            >
+                                ×
+                            </button>
+
+                            <div className="detail-header">
+                                <span
+                                    className="book-chapters"
+                                    style={{ background: CATEGORY_COLORS[activeBeing.category] }}
+                                >
+                                    {activeBeing.category}
+                                </span>
+                                <h2 className="detail-name">{activeBeing.name}</h2>
+                                {activeBeing.aka && activeBeing.aka.length > 0 && (
+                                    <div className="being-aka">{activeBeing.aka.join(' · ')}</div>
+                                )}
+                            </div>
+
+                            <div className="book-details">
+                                <p className="book-summary">{activeBeing.description}</p>
+
+                                <div className="book-meta">
+                                    <div className="meta-label">THEMES</div>
+                                    <div className="theme-tags">
+                                        {activeBeing.themes.map((theme) => (
+                                            <span key={theme} className="theme-tag">{theme}</span>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="meta-label">SCRIPTURE REFERENCE</div>
+                                <p className="book-figures">{activeBeing.scripture.join(' · ')}</p>
+
+                                <div className="meta-label modern-label">MODERN CORRELATIONS</div>
+                                <p className="modern-correlations">{activeBeing.modernCorrelations}</p>
+                            </div>
+                        </div>
+                    )}
+                </>
+            )}
         </section>
     )
 }

@@ -65,13 +65,24 @@ function generateEdges() {
     })
 }
 
-function RealmGraph() {
+function RealmGraph({ onBeingClick}) {
     const [nodes, , onNodesChange] = useNodesState(generateNodes())
     const [edges] = useEdgesState(generateEdges())
+    const handleNodeClick = (event, node) => {
+        const being = BEINGS.find((b) => b.name === node.id)
+        if (being && onBeingClick) {
+            onBeingClick(being)
+        }
+    }
 
     return (
         <div style={{ width: '100%', height: '600px', background: '#0b0b14', borderRadius: '8px' }}>
-            <ReactFlow nodes={nodes} edges={edges} onNodesChange={onNodesChange} fitView>
+            <ReactFlow nodes={nodes}
+                       edges={edges}
+                       onNodesChange={onNodesChange}
+                       onNodeClick={handleNodeClick}
+                       fitView
+                    >
                 <Background color="#2a2a40" gap={20} />
                 <Controls />
                 <MiniMap
