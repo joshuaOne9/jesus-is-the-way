@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { BEINGS, CATEGORIES, CATEGORY_COLORS } from '../data/beings'
 import RealmGraph from './RealmGraph'
 
@@ -6,6 +6,14 @@ function Beings() {
     const [category, setCategory] = useState('All')
     const [activeBeing, setActiveBeing] = useState(null)
     const [viewMode, setViewMode] = useState('cards')
+
+    const detailPanelRef = useRef(null)
+
+    useEffect(() => {
+        if (activeBeing && viewMode === 'graph' && detailPanelRef.current) {
+            detailPanelRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }
+    }, [activeBeing, viewMode])
 
     const filtered = category === 'All'
         ? BEINGS
@@ -116,7 +124,7 @@ function Beings() {
                     <RealmGraph onBeingClick={setActiveBeing} />
 
                     {activeBeing && (
-                        <div className="graph-detail-panel">
+                        <div className="graph-detail-panel" ref={detailPanelRef}>
                             <button
                                 className="close-detail"
                                 onClick={() => setActiveBeing(null)}
