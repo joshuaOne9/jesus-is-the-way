@@ -883,3 +883,56 @@
   font-family: Georgia, serif;
   font-weight: normal;
 }
+
+.edge-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 12px 16px;
+  background: rgba(202, 168, 76, 0.04);
+  border: 1px solid #2a2a40;
+  border-radius: 8px;
+}
+
+.edge-filter-label {
+  color: #9a9080;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-right: 4px;
+}
+
+.edge-filter button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid #2a2a40;
+  color: #9a9080;
+  padding: 5px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.edge-filter button:hover {
+  border-color: #c9a84c;
+  color: #c9a84c;
+}
+
+.edge-filter button.edge-filter-active {
+  border-color: #c9a84c;
+  color: #c9a84c;
+  background: rgba(201, 168, 76, 0.1);
+}
+
+.edge-filter-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  display: inline-block;
+}
