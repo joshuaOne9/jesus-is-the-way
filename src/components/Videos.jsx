@@ -1,6 +1,28 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
 
+// Convert a YouTube watch/share URL into an embeddable URL
+function getYouTubeEmbedUrl(url) {
+    try {
+        const parsed = new URL(url)
+        let videoId = null
+
+        if (parsed.hostname.includes('youtu.be')) {
+            videoId = parsed.pathname.slice(1)            // https://youtu.be/VIDEO_ID
+        } else if (parsed.pathname.startsWith('/embed/')) {
+            videoId = parsed.pathname.split('/embed/')[1] // already an embed URL
+        } else if (parsed.pathname.startsWith('/shorts/')) {
+            videoId = parsed.pathname.split('/shorts/')[1] // a Short
+        } else {
+            videoId = parsed.searchParams.get('v')        // https://youtube.com/watch?v=VIDEO_ID
+        }
+
+        return videoId ? `https://www.youtube.com/embed/${videoId}` : null
+    } catch {
+        return null
+    }
+}
+
 function Videos() {
     const [videos, setVideos] = useState([])
     const [loading, setLoading] = useState(true)
@@ -17,7 +39,6 @@ function Videos() {
                 console.error('Error fetching videos:', error)
                 setError(error.message)
             } else {
-                console.log('Videos fetched:', data)
                 setVideos(data)
             }
             setLoading(false)
@@ -40,20 +61,56 @@ function Videos() {
                 <p className="page-eyebrow">Watch</p>
                 <h1>Videos</h1>
                 <div className="page-divider"></div>
+                <p className="page-intro">Deliverance, teaching, and testimony.</p>
             </header>
 
             {videos.length === 0 ? (
                 <p>No videos yet.</p>
             ) : (
-                <div className="books-grid">
-                    {videos.map((video) => (
-                        <div key={video.id} className="book-card">
-                            <div className="book-name">{video.title}</div>
-                            {video.category && <div className="being-aka">{video.category}</div>}
-                            {video.description && <p className="book-summary">{video.description}</p>}
-                            <p className="book-figures">{video.source_type}: {video.source_url}</p>
-                        </div>
-                    ))}
+                <div className="videos-grid">
+                    {videos.map((video) => {
+                        const embedUrl =
+                            video.source_type === 'link'
+                                ? getYouTubeEmbedUrl(video.source_url)
+                                : null
+
+                        return (
+                            <div key={video.id} className="video-card">
+                                <div className="video-player">
+                                    {video.source_type === 'link' && embedUrl && (
+                                        <iframe
+                                            src={embedUrl}
+                                            title={video.title}
+                                            loading="lazy"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                        ></iframe>
+                                    )}
+
+                                    {video.source_type === 'link' && !embedUrl && (
+                                        <p className="video-fallback">
+                                            Couldn't load this video.{' '}
+                                            <a href={video.source_url} target="_blank" rel="noopener noreferrer">
+                                                Open it directly
+                                            </a>.
+                                        </p>
+                                    )}
+
+                                    {video.source_type === 'file' && (
+                                        <video controls preload="metadata" src={video.source_url}>
+                                            Your browser doesn't support video playback.
+                                        </video>
+                                    )}
+                                </div>
+
+                                <div className="video-info">
+                                    <h2 className="video-title">{video.title}</h2>
+                                    {video.category && <span className="video-category">{video.category}</span>}
+                                    {video.description && <p className="video-description">{video.description}</p>}
+                                </div>
+                            </div>
+                        )
+                    })}
                 </div>
             )}
         </section>
