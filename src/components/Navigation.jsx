@@ -5,6 +5,7 @@ function Navigation({ currentPage, setCurrentPage }) {
         { id: 'books', label: 'Books of The Bible' },
         { id: 'spiritual-realm', label: 'The Spiritual Realm' },
         { id: 'read', label: 'Read Scripture' },
+        { id: 'videos', label: 'Videos' },
         { id: 'ask', label: 'Ask a Question' },
     ]
 
