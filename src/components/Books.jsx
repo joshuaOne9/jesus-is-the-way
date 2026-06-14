@@ -9,7 +9,7 @@ function Books() {
     const genres =
         testament === 'OT' ? OT_GENRES :
         testament === 'NT' ? NT_GENRES :
-        [...OT_GENRES, ...NT_GENRES]
+        [...new Set([OT_GENRES, ...NT_GENRES])]
 
     const filtered = BOOKS.filter((book) => {
         const matchTestament = testament === 'Both' || book.testament === testament
