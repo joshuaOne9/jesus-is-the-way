@@ -1,4 +1,4 @@
-function Navigation({ currentPage, setCurrentPage }) {
+function Navigation({ currentPage, setCurrentPage, user, loading }) {
     const links = [
         { id: 'home', label: 'Home' },
         { id: 'gospel', label: 'The Gospel' },
@@ -8,6 +8,10 @@ function Navigation({ currentPage, setCurrentPage }) {
         { id: 'videos', label: 'Videos' },
         { id: 'ask', label: 'Ask a Question' },
     ]
+
+    if (!loading) {
+        links.push({ id: 'account', label: user ? 'Account' : 'Sign In'})
+    }
 
     return (
         <nav className="nav">

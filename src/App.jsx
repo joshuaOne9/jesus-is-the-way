@@ -7,14 +7,21 @@ import Read from './components/Read'
 import Ask from './components/Ask'
 import Beings from './components/Beings'
 import Videos from './components/Videos'
+import { useAuth } from './hooks/useAuth'
+import Auth from './components/Auth'
+
 
 function App() {
+
+  const { user, loading } = useAuth()
   const [currentPage, setCurrentPage] = useState('home')
   return (
     <>
       <Navigation
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
+        user={user}
+        loading={loading}
       />
 
       {currentPage === 'home' && (
@@ -37,6 +44,8 @@ function App() {
     {currentPage === 'ask' && <Ask />}
 
     {currentPage === 'videos' && <Videos />}
+
+    {currentPage === 'account' && <Auth user={user} />}
   </>
   )
 }
