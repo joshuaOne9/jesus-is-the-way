@@ -2,25 +2,35 @@ import { useState } from 'react'
 import { supabase } from '../lib/supabase'
 
 function Auth({ user }) {
-    const [mode, setMode] = useState('login')   // 'login' or 'signup'
+    const [mode, setMode] = useState('login')   // 'login', 'signup', or 'reset'
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState(null)
     const [message, setMessage] = useState(null)
     const [submitting, setSubmitting] = useState(false)
 
-    async function handleSubmit() {
+    function clearFeedback() {
         setError(null)
         setMessage(null)
+    }
+
+    async function handleSubmit() {
+        clearFeedback()
         setSubmitting(true)
 
         if (mode === 'signup') {
             const { error } = await supabase.auth.signUp({ email, password })
             if (error) setError(error.message)
             else setMessage('Account created!')
-        } else {
+        } else if (mode === 'login') {
             const { error } = await supabase.auth.signInWithPassword({ email, password })
             if (error) setError(error.message)
+        } else if (mode === 'reset') {
+            const { error } = await supabase.auth.resetPasswordForEmail(email, {
+                redirectTo: window.location.origin,
+            })
+            if (error) setError(error.message)
+            else setMessage('Check your email for a password reset link.')
         }
 
         setSubmitting(false)
@@ -30,7 +40,7 @@ function Auth({ user }) {
         await supabase.auth.signOut()
     }
 
-    // Logged in → show account info + logout
+    // Logged in → account view
     if (user) {
         return (
             <section className="page">
@@ -47,12 +57,16 @@ function Auth({ user }) {
         )
     }
 
-    // Logged out → show the form
+    const heading =
+        mode === 'login' ? 'Sign In' :
+        mode === 'signup' ? 'Create an Account' :
+        'Reset Your Password'
+
     return (
         <section className="page">
             <header className="page-header">
                 <p className="page-eyebrow">Account</p>
-                <h1>{mode === 'login' ? 'Sign In' : 'Create an Account'}</h1>
+                <h1>{heading}</h1>
                 <div className="page-divider"></div>
             </header>
 
@@ -64,33 +78,51 @@ function Auth({ user }) {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
-                <input
-                    type="password"
-                    className="auth-input"
-                    placeholder="Password (min 6 characters)"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
+
+                {mode !== 'reset' && (
+                    <input
+                        type="password"
+                        className="auth-input"
+                        placeholder="Password (min 6 characters)"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                )}
 
                 {error && <p className="auth-error">{error}</p>}
                 {message && <p className="auth-message">{message}</p>}
 
                 <button className="auth-submit" onClick={handleSubmit} disabled={submitting}>
-                    {submitting ? 'Please wait...' : mode === 'login' ? 'Sign In' : 'Sign Up'}
+                    {submitting ? 'Please wait...' :
+                        mode === 'login' ? 'Sign In' :
+                        mode === 'signup' ? 'Sign Up' :
+                        'Send Reset Link'}
                 </button>
 
+                {mode === 'login' && (
+                    <p className="auth-toggle">
+                        <button className="auth-toggle-btn" onClick={() => { setMode('reset'); clearFeedback() }}>
+                            Forgot password?
+                        </button>
+                    </p>
+                )}
+
                 <p className="auth-toggle">
-                    {mode === 'login' ? "Don't have an account?" : 'Already have an account?'}{' '}
-                    <button
-                        className="auth-toggle-btn"
-                        onClick={() => {
-                            setMode(mode === 'login' ? 'signup' : 'login')
-                            setError(null)
-                            setMessage(null)
-                        }}
-                    >
-                        {mode === 'login' ? 'Sign up' : 'Sign in'}
-                    </button>
+                    {mode === 'login' && (
+                        <>Don't have an account?{' '}
+                            <button className="auth-toggle-btn" onClick={() => { setMode('signup'); clearFeedback() }}>Sign up</button>
+                        </>
+                    )}
+                    {mode === 'signup' && (
+                        <>Already have an account?{' '}
+                            <button className="auth-toggle-btn" onClick={() => { setMode('login'); clearFeedback() }}>Sign in</button>
+                        </>
+                    )}
+                    {mode === 'reset' && (
+                        <>Remembered it?{' '}
+                            <button className="auth-toggle-btn" onClick={() => { setMode('login'); clearFeedback() }}>Back to sign in</button>
+                        </>
+                    )}
                 </p>
             </div>
         </section>

@@ -9,12 +9,18 @@ import Beings from './components/Beings'
 import Videos from './components/Videos'
 import { useAuth } from './hooks/useAuth'
 import Auth from './components/Auth'
+import ResetPassword from './components/ResetPassword'
 
 
 function App() {
 
-  const { user, loading } = useAuth()
+  const { user, loading, recovering, setRecovering } = useAuth()
   const [currentPage, setCurrentPage] = useState('home')
+
+  if (recovering) {
+    return <ResetPassword onDone={() => setRecovering(false)} />
+  }
+
   return (
     <>
       <Navigation
@@ -25,28 +31,22 @@ function App() {
       />
 
       {currentPage === 'home' && (
-      <div className="hero">
-        <h1>Jesus is the Way</h1>
-        <p className="subtitle">"I am the way, and the truth, and the life." John 14:6</p>
-        <p className="description">
-          A place to explore Scripture, encounter Jesus, and seek context from all books related to The Bible</p>
-      </div>
-  )}
+        <div className="hero">
+          <h1>Jesus is the Way</h1>
+          <p className="subtitle">"I am the way, and the truth, and the life." John 14:6</p>
+          <p className="description">
+            A place to explore Scripture, encounter Jesus, and seek context from all books related to The Bible</p>
+        </div>
+      )}
 
-  {currentPage === 'gospel' && <Gospel />}
-
-    {currentPage === 'books' && <Books />}
-
-    {currentPage === 'read' && <Read />}
-
-    {currentPage === 'spiritual-realm' && <Beings />}
-
-    {currentPage === 'ask' && <Ask />}
-
-    {currentPage === 'videos' && <Videos />}
-
-    {currentPage === 'account' && <Auth user={user} />}
-  </>
+      {currentPage === 'gospel' && <Gospel />}
+      {currentPage === 'books' && <Books />}
+      {currentPage === 'read' && <Read />}
+      {currentPage === 'spiritual-realm' && <Beings />}
+      {currentPage === 'ask' && <Ask />}
+      {currentPage === 'videos' && <Videos />}
+      {currentPage === 'account' && <Auth user={user} />}
+    </>
   )
 }
 
