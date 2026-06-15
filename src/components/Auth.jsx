@@ -8,6 +8,7 @@ function Auth({ user }) {
     const [error, setError] = useState(null)
     const [message, setMessage] = useState(null)
     const [submitting, setSubmitting] = useState(false)
+    const [showPassword, setShowPassword] = useState(false)
 
     function clearFeedback() {
         setError(null)
@@ -80,13 +81,22 @@ function Auth({ user }) {
                 />
 
                 {mode !== 'reset' && (
-                    <input
-                        type="password"
-                        className="auth-input"
-                        placeholder="Password (min 6 characters)"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
+                    <div className="auth-password-wrap">
+                        <input
+                            type={showPassword ? 'text' : 'password'}
+                            className="auth-input"
+                            placeholder="Password (min 6 characters)"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                />
+                <button
+                    type="button"
+                    className="auth-show-toggle"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                >
+                {showPassword ? 'Hide' : 'Show'}
+                </button>
+                </div>
                 )}
 
                 {error && <p className="auth-error">{error}</p>}

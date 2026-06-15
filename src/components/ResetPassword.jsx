@@ -3,6 +3,7 @@ import { supabase } from '../lib/supabase'
 
 function ResetPassword({ onDone }) {
     const [password, setPassword] = useState('')
+    const [showPassword, setShowPassword] = useState(false)
     const [error, setError] = useState(null)
     const [message, setMessage] = useState(null)
     const [submitting, setSubmitting] = useState(false)
@@ -44,6 +45,23 @@ function ResetPassword({ onDone }) {
                         {submitting ? 'Updating...' : 'Update Password'}
                     </button>
                 )}
+            </div>
+
+            <div className="auth-password-wrap">
+                <input
+                    type={showPassword ? 'text' : 'password'}
+                    className="auth-input"
+                    placeholder="New password (min 6 characters)"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                <button
+                    type="button"
+                    className="auth-show-toggle"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                >
+                {showPassword ? 'Hide' : 'Show'}
+                </button>
             </div>
         </section>
     )

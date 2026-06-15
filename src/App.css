@@ -1098,3 +1098,27 @@
   margin: 0 0 8px;
   text-align: center;
 }
+
+.auth-password-wrap {
+  position: relative;
+  display: flex;
+}
+
+.auth-password-wrap .auth-input {
+  flex: 1;
+  padding-right: 64px;
+}
+
+.auth-show-toggle {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #c9a84c;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 4px 6px;
+}
