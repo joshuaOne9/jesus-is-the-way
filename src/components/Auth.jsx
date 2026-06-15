@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { supabase } from '../lib/supabase'
+import Profile from './Profile'
 
 function Auth({ user }) {
     const [mode, setMode] = useState('login')   // 'login', 'signup', or 'reset'
@@ -41,8 +42,7 @@ function Auth({ user }) {
         await supabase.auth.signOut()
     }
 
-    // Logged in → account view
-    if (user) {
+   if (user) {
         return (
             <section className="page">
                 <header className="page-header">
@@ -50,7 +50,10 @@ function Auth({ user }) {
                     <h1>Your Account</h1>
                     <div className="page-divider"></div>
                 </header>
-                <div className="auth-box">
+
+                <Profile user={user} />
+
+                <div className="auth-box" style={{ marginTop: '16px' }}>
                     <p className="auth-signed-in">Signed in as <strong>{user.email}</strong></p>
                     <button className="auth-submit" onClick={handleLogout}>Log out</button>
                 </div>

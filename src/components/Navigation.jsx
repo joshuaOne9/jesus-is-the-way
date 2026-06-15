@@ -6,6 +6,7 @@ function Navigation({ currentPage, setCurrentPage, user, loading }) {
         { id: 'spiritual-realm', label: 'The Spiritual Realm' },
         { id: 'read', label: 'Read Scripture' },
         { id: 'videos', label: 'Videos' },
+        { id: 'members', label: 'Community' },
         { id: 'ask', label: 'Ask a Question' },
     ]
 

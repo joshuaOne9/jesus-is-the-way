@@ -1122,3 +1122,17 @@
   font-family: inherit;
   padding: 4px 6px;
 }
+
+.profile-label {
+  color: #9a9080;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: -6px;
+}
+
+.profile-textarea {
+  resize: vertical;
+  min-height: 80px;
+  font-family: inherit;
+}

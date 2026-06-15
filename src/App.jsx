@@ -10,6 +10,7 @@ import Videos from './components/Videos'
 import { useAuth } from './hooks/useAuth'
 import Auth from './components/Auth'
 import ResetPassword from './components/ResetPassword'
+import Members from './components/Members'
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
       {currentPage === 'ask' && <Ask />}
       {currentPage === 'videos' && <Videos />}
       {currentPage === 'account' && <Auth user={user} />}
+      {currentPage === 'members' && <Members />}
     </>
   )
 }
