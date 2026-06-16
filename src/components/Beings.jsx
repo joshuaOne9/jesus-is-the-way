@@ -1,12 +1,13 @@
 import { useState, useEffect, useRef } from 'react'
 import { BEINGS, CATEGORIES, CATEGORY_COLORS } from '../data/beings'
 import RealmGraph from './RealmGraph'
+import { useFavorites } from '../hooks/useFavorites'
 
-function Beings() {
+function Beings({user}) {
     const [category, setCategory] = useState('All')
     const [activeBeing, setActiveBeing] = useState(null)
     const [viewMode, setViewMode] = useState('cards')
-
+    const { isFavorited, toggleFavorite } = useFavorites(user)
     const detailPanelRef = useRef(null)
 
     useEffect(() => {
@@ -78,15 +79,27 @@ function Beings() {
                             className={`book-card ${isActive ? 'book-active' : ''}`}
                             onClick={() => setActiveBeing(isActive ? null : being)}
                         >
-                            <div className="book-card-top">
-                                <span
-                                    className="book-chapters"
-                                    style={{ background: CATEGORY_COLORS[being.category]}}
+                        <div className="book-card-top">
+                            <span
+                                className="book-chapters"
+                                style={{ background: CATEGORY_COLORS[being.category]}}
+                            >
+                                {being.category}
+                             </span>
+                            {user && (
+                                <button
+                                    className="fav-btn"
+                                    onClick={(e) => {
+                                        e.stopPropagation()
+                                        toggleFavorite('being', being.name)
+                                    }}
+                                    aria-label="Toggle favorite"
                                 >
-                                    {being.category}
-                                </span>
-                            </div>
-                            <div className="book-name">{being.name}</div>
+                                    {isFavorited('being', being.name) ? '♥' : '♡'}
+                                </button>
+                            )}
+                        </div>
+                        <div className="book-name">{being.name}</div>
 
                             {being.aka && being.aka.length > 0 && (
                                 <div className="being-aka">{being.aka.join(' · ')}</div>

@@ -1136,3 +1136,31 @@
   min-height: 80px;
   font-family: inherit;
 }
+
+.book-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fav-btn {
+  background: none;
+  border: none;
+  color: #c9a84c;
+  font-size: 20px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 4px;
+}
+
+.fav-btn:hover {
+  color: #e0c068;
+}
+
+.fav-section-title {
+  color: #c9a84c;
+  font-size: 18px;
+  font-family: Georgia, serif;
+  font-weight: normal;
+  margin: 24px 0 12px;
+}

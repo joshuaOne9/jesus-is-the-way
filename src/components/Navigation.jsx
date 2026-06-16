@@ -10,8 +10,12 @@ function Navigation({ currentPage, setCurrentPage, user, loading }) {
         { id: 'ask', label: 'Ask a Question' },
     ]
 
-    if (!loading) {
-        links.push({ id: 'account', label: user ? 'Account' : 'Sign In'})
+   if (!loading) {
+    if (user) {
+        links.push({ id: 'favorites', label: 'My Favorites' })
+    }
+    links.push({ id: 'account', label: user ? 'Account' : 'Sign In' })
+    
     }
 
     return (

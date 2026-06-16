@@ -11,6 +11,7 @@ import { useAuth } from './hooks/useAuth'
 import Auth from './components/Auth'
 import ResetPassword from './components/ResetPassword'
 import Members from './components/Members'
+import Favorites from './components/Favorites'
 
 
 function App() {
@@ -43,11 +44,12 @@ function App() {
       {currentPage === 'gospel' && <Gospel />}
       {currentPage === 'books' && <Books />}
       {currentPage === 'read' && <Read />}
-      {currentPage === 'spiritual-realm' && <Beings />}
+      {currentPage === 'spiritual-realm' && <Beings user={user} />}
       {currentPage === 'ask' && <Ask />}
       {currentPage === 'videos' && <Videos />}
       {currentPage === 'account' && <Auth user={user} />}
       {currentPage === 'members' && <Members />}
+      {currentPage === 'favorites' && <Favorites user={user} />}
     </>
   )
 }
