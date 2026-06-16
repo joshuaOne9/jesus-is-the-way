@@ -88,14 +88,14 @@ function Beings({user}) {
                              </span>
                             {user && (
                                 <button
-                                    className="fav-btn"
+                                    className={isFavorited('being', being.name) ? 'fav-btn fav-active' : 'fav-btn'}
                                     onClick={(e) => {
                                         e.stopPropagation()
                                         toggleFavorite('being', being.name)
                                     }}
-                                    aria-label="Toggle favorite"
-                                >
-                                    {isFavorited('being', being.name) ? '♥' : '♡'}
+                                        aria-label="Toggle favorite"
+                                    >
+                                        ✝
                                 </button>
                             )}
                         </div>

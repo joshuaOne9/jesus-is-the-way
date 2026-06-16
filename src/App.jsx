@@ -50,6 +50,8 @@ function App() {
       {currentPage === 'account' && <Auth user={user} />}
       {currentPage === 'members' && <Members />}
       {currentPage === 'favorites' && <Favorites user={user} />}
+      {currentPage === 'books' && <Books user={user} />}
+      {currentPage === 'videos' && <Videos user={user} />}
     </>
   )
 }

@@ -30,7 +30,7 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(11, 11, 20 ,0.95);
+  background: rgba(11, 11, 20, 0.95);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid #2a2a40;
   padding: 0 24px;
@@ -70,7 +70,9 @@
   border-radius: 4px;
   font-size: 13px;
   border: 1px solid transparent;
-  transition: color 0.2s, border-color 0.2s;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
 }
 
 .nav-links a:hover {
@@ -88,7 +90,10 @@
   font-size: 13px;
   font-family: Georgia, serif;
   cursor: pointer;
-  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  transition:
+    color 0.2s,
+    border-color 0.2s,
+    background 0.2s;
 }
 
 .nav-links button:hover {
@@ -575,7 +580,9 @@
   background: transparent;
   border: 1px solid #2a2a40;
   color: #9a9080;
-  transition: border-color 0.2s, color 0.2s;
+  transition:
+    border-color 0.2s,
+    color 0.2s;
 }
 
 .popular-pill:hover {
@@ -1146,11 +1153,21 @@
 .fav-btn {
   background: none;
   border: none;
-  color: #c9a84c;
-  font-size: 20px;
+  color: #6a6458;
+  /* muted = not saved */
+  font-size: 18px;
   cursor: pointer;
   line-height: 1;
   padding: 0 4px;
+}
+
+.fav-btn.fav-active {
+  color: #c9a84c;
+}
+
+/* gold = saved */
+.fav-btn:hover {
+  color: #e0c068;
 }
 
 .fav-btn:hover {
@@ -1163,4 +1180,11 @@
   font-family: Georgia, serif;
   font-weight: normal;
   margin: 24px 0 12px;
+}
+
+.video-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
 }

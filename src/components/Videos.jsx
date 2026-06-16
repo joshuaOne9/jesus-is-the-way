@@ -1,20 +1,20 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
+import { useFavorites } from '../hooks/useFavorites'
 
-// Convert a YouTube watch/share URL into an embeddable URL
 function getYouTubeEmbedUrl(url) {
     try {
         const parsed = new URL(url)
         let videoId = null
 
         if (parsed.hostname.includes('youtu.be')) {
-            videoId = parsed.pathname.slice(1)            // https://youtu.be/VIDEO_ID
+            videoId = parsed.pathname.slice(1)
         } else if (parsed.pathname.startsWith('/embed/')) {
-            videoId = parsed.pathname.split('/embed/')[1] // already an embed URL
+            videoId = parsed.pathname.split('/embed/')[1]
         } else if (parsed.pathname.startsWith('/shorts/')) {
-            videoId = parsed.pathname.split('/shorts/')[1] // a Short
+            videoId = parsed.pathname.split('/shorts/')[1]
         } else {
-            videoId = parsed.searchParams.get('v')        // https://youtube.com/watch?v=VIDEO_ID
+            videoId = parsed.searchParams.get('v')
         }
 
         return videoId ? `https://www.youtube.com/embed/${videoId}` : null
@@ -23,10 +23,11 @@ function getYouTubeEmbedUrl(url) {
     }
 }
 
-function Videos() {
+function Videos({ user }) {
     const [videos, setVideos] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
+    const { isFavorited, toggleFavorite } = useFavorites(user)
 
     useEffect(() => {
         async function fetchVideos() {
@@ -104,7 +105,18 @@ function Videos() {
                                 </div>
 
                                 <div className="video-info">
-                                    <h2 className="video-title">{video.title}</h2>
+                                    <div className="video-title-row">
+                                        <h2 className="video-title">{video.title}</h2>
+                                        {user && (
+                                            <button
+                                                className={isFavorited('video', video.id) ? 'fav-btn fav-active' : 'fav-btn'}
+                                                onClick={() => toggleFavorite('video', video.id)}
+                                                aria-label="Toggle favorite"
+                                            >
+                                                ✝
+                                            </button>
+                                        )}
+                                    </div>
                                     {video.category && <span className="video-category">{video.category}</span>}
                                     {video.description && <p className="video-description">{video.description}</p>}
                                 </div>

@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { BOOKS, OT_GENRES, NT_GENRES, GENRE_COLORS } from '../data/books'
+import { useFavorites } from '../hooks/useFavorites'
 
-function Books() {
+function Books({ user }) {
     const [testament, setTestament] = useState('Both')
     const [genre, setGenre] = useState('All')
     const [activeBook, setActiveBook] = useState(null)
+    const { isFavorited, toggleFavorite } = useFavorites(user)
 
     const genres =
         testament === 'OT' ? OT_GENRES :
@@ -75,12 +77,23 @@ function Books() {
                                 <span className="book-testament">{book.testament}</span>
                                 <span
                                     className="book-chapters"
-                                    style={{ background: GENRE_COLORS[book.genre] }}
-                                >
-
+                                    style={{ background: GENRE_COLORS[book.genre] }}>
                                     {book.chapters} ch
                                 </span>
+                                {user && (
+                                    <button
+                                        className={isFavorited('book', book.name) ? 'fav-btn fav-active' : 'fav-btn'}
+                                        onClick={(e) => {
+                                            e.stopPropagation()
+                                            toggleFavorite('book', book.name)
+                                        }}
+                                        aria-label="Toggle favorite"
+                                    >
+                                        ✝
+                                    </button>
+                                )}
                             </div>
+                            
                             <div className="book-name">{book.name}</div>
                             <div className="book-genre">{book.genre}</div>
                             
