@@ -3,9 +3,13 @@ import { useState, useEffect } from "react";
 function BookReader({ book }) {
   const [chapter, setChapter] = useState(1);
   const [verses, setVerses] = useState([]);
+  const [loadedChapter, setLoadedChapter] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [reloadKey, setReloadKey] = useState(0);
+  const [direction, setDirection] = useState("next");
+  const [jump, setJump] = useState("");
+  const [targetVerse, setTargetVerse] = useState(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -25,6 +29,7 @@ function BookReader({ book }) {
         const data = await res.json();
         if (cancelled) return;
         setVerses(data.verses || []);
+        setLoadedChapter(chapter);
         setLoading(false);
       } catch (err) {
         if (cancelled) return;
@@ -37,7 +42,6 @@ function BookReader({ book }) {
           return;
         }
 
-        // Transient network hiccup — retry a couple of times before giving up
         if (attempt < 3) {
           setTimeout(() => {
             if (!cancelled) load(attempt + 1);
@@ -57,16 +61,39 @@ function BookReader({ book }) {
     };
   }, [book.name, chapter, reloadKey]);
 
+  // Scroll to and highlight a searched verse once the chapter has loaded
+  useEffect(() => {
+    if (!targetVerse || loadedChapter == null) return;
+    const el = document.getElementById(`verse-${targetVerse}`);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+    const t = setTimeout(() => setTargetVerse(null), 2500);
+    return () => clearTimeout(t);
+  }, [targetVerse, loadedChapter, verses]);
+
   function prevChapter() {
+    setDirection("prev");
     setChapter((c) => Math.max(1, c - 1));
   }
 
   function nextChapter() {
+    setDirection("next");
     setChapter((c) => Math.min(book.chapters, c + 1));
   }
 
   function retry() {
     setReloadKey((k) => k + 1);
+  }
+
+  function goToReference(e) {
+    e.preventDefault();
+    const nums = jump.match(/\d+/g);
+    if (!nums || nums.length === 0) return;
+    const ch = Math.min(book.chapters, Math.max(1, parseInt(nums[0], 10)));
+    const vs = nums[1] ? parseInt(nums[1], 10) : null;
+    setDirection(ch >= chapter ? "next" : "prev");
+    setChapter(ch);
+    setTargetVerse(vs);
+    setJump("");
   }
 
   return (
@@ -83,19 +110,43 @@ function BookReader({ book }) {
         </button>
       </div>
 
-      {loading && <p className="reader-status">Loading chapter...</p>}
+      <form className="reader-search" onSubmit={goToReference}>
+        <input
+          type="text"
+          value={jump}
+          onChange={(e) => setJump(e.target.value)}
+          placeholder={`Find a verse — e.g. 3 · 3:16 · "chapter 3 verse 16"  (1–${book.chapters})`}
+          aria-label="Go to chapter or verse"
+        />
+        <button type="submit">Go</button>
+      </form>
+
+      {loading && <div className="reader-loading-bar" />}
 
       {error && (
-        <div className="reader-status">
-          <p>{error}</p>
+        <div className="reader-error">
+          <span>{error}</span>
           <button onClick={retry}>Try again</button>
         </div>
       )}
 
-      {!loading && !error && (
-        <div className="reader-text">
+      {verses.length === 0 && loading && (
+        <p className="reader-status">Loading chapter…</p>
+      )}
+
+      {verses.length > 0 && (
+        <div
+          key={loadedChapter}
+          className={`reader-text ${
+            direction === "next" ? "page-forward" : "page-backward"
+          }`}>
           {verses.map((verse) => (
-            <p key={verse.verse} className="reader-verse">
+            <p
+              key={verse.verse}
+              id={`verse-${verse.verse}`}
+              className={`reader-verse ${
+                verse.verse === targetVerse ? "verse-highlight" : ""
+              }`}>
               <span className="verse-number">{verse.verse}</span>
               {verse.text.trim()}
             </p>

@@ -47,7 +47,6 @@ function App() {
       {currentPage === "read" && <Read />}
       {currentPage === "spiritual-realm" && <Beings user={user} />}
       {currentPage === "ask" && <Ask />}
-      {currentPage === "videos" && <Videos />}
       {currentPage === "account" && <Auth user={user} />}
       {currentPage === "members" && <Members />}
       {currentPage === "favorites" && <Favorites user={user} />}

@@ -4,6 +4,7 @@ import { BOOKS, GENRE_COLORS } from "../data/books";
 import { supabase } from "../lib/supabase";
 import { useFavorites } from "../hooks/useFavorites";
 import { getYouTubeEmbedUrl } from "../lib/youtube";
+import BookReader from "./BookReader";
 
 function Favorites({ user }) {
   const { favorites, loading, toggleFavorite } = useFavorites(user);
@@ -173,6 +174,7 @@ function Favorites({ user }) {
                   {isActive && (
                     <div className="book-details">
                       <p className="book-summary">{book.summary}</p>
+                      <BookReader book={book} />
                     </div>
                   )}
                 </div>
