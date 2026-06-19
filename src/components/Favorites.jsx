@@ -12,24 +12,28 @@ function Favorites({ user }) {
   const [activeKey, setActiveKey] = useState(null);
 
   useEffect(() => {
+    let cancelled = false;
+
     const videoIds = favorites
       .filter((f) => f.item_type === "video")
       .map((f) => f.item_id);
 
-    if (videoIds.length === 0) {
-      setFavVideos([]);
-      return;
-    }
-
     async function loadVideos() {
+      if (videoIds.length === 0) {
+        if (!cancelled) setFavVideos([]);
+        return;
+      }
       const { data } = await supabase
         .from("videos")
         .select("*")
         .in("id", videoIds);
-      setFavVideos(data || []);
+      if (!cancelled) setFavVideos(data || []);
     }
-
     loadVideos();
+
+    return () => {
+      cancelled = true;
+    };
   }, [favorites]);
 
   function toggleCard(key) {

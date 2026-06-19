@@ -1202,13 +1202,19 @@
 }
 
 .reader-controls {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 12px 16px;
-  background: rgba(120, 90, 40, 0.08);
-  border-bottom: 1px solid rgba(120, 90, 40, 0.2);
+  padding: 10px 12px;
+  background: rgba(245, 240, 225, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 8px 8px 0 0;
 }
 
 .reader-controls button {
@@ -1377,4 +1383,61 @@
 .page-backward {
   animation: turnBackward 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
   transform-origin: left center;
+}
+
+.chapter-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: rgba(212, 175, 55, 0.08);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path fill='%23d4af37' d='M2 4l4 4 4-4z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 10px;
+  border: 1px solid #d4af37;
+  border-radius: 6px;
+  color: inherit;
+  font: inherit;
+  font-weight: 600;
+  padding: 4px 26px 4px 10px;
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    transform 100ms ease;
+}
+
+.chapter-select:hover {
+  background-color: rgba(212, 175, 55, 0.18);
+  border-color: #f0c850;
+}
+
+.chapter-select:focus {
+  outline: none;
+  border-color: #f0c850;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.25);
+}
+
+.chapter-select:active {
+  transform: scale(0.97);
+}
+
+.chapter-select option {
+  background-color: #1a1a1a;
+  color: #f5f5f5;
+  font-weight: 500;
+}
+
+.reader-text-loading {
+  opacity: 0.4;
+  transition: opacity 200ms ease;
+}
+
+.reader-controls-bottom {
+  position: static;
+  margin-top: 28px;
+  border-bottom: none;
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 0 0 8px 8px;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }

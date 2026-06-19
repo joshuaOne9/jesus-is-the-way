@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 function BookReader({ book }) {
   const [chapter, setChapter] = useState(1);
@@ -10,6 +10,9 @@ function BookReader({ book }) {
   const [direction, setDirection] = useState("next");
   const [jump, setJump] = useState("");
   const [targetVerse, setTargetVerse] = useState(null);
+
+  const readerRef = useRef(null);
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
     let cancelled = false;
@@ -61,6 +64,18 @@ function BookReader({ book }) {
     };
   }, [book.name, chapter, reloadKey]);
 
+  // Scroll the reader into view whenever the chapter changes — except on
+  // first mount, and except when a specific verse was searched (that has
+  // its own scroll logic below).
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    if (targetVerse) return;
+    readerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [chapter, targetVerse]);
+
   // Scroll to and highlight a searched verse once the chapter has loaded
   useEffect(() => {
     if (!targetVerse || loadedChapter == null) return;
@@ -80,6 +95,11 @@ function BookReader({ book }) {
     setChapter((c) => Math.min(book.chapters, c + 1));
   }
 
+  function jumpToChapter(ch) {
+    setDirection(ch >= chapter ? "next" : "prev");
+    setChapter(ch);
+  }
+
   function retry() {
     setReloadKey((k) => k + 1);
   }
@@ -97,13 +117,27 @@ function BookReader({ book }) {
   }
 
   return (
-    <div className="book-reader" onClick={(e) => e.stopPropagation()}>
+    <div
+      className="book-reader"
+      ref={readerRef}
+      onClick={(e) => e.stopPropagation()}>
       <div className="reader-controls">
         <button onClick={prevChapter} disabled={chapter === 1}>
           ← Prev
         </button>
         <span className="reader-chapter">
-          {book.name} {chapter}
+          {book.name}{" "}
+          <select
+            className="chapter-select"
+            value={chapter}
+            onChange={(e) => jumpToChapter(Number(e.target.value))}
+            aria-label="Jump to chapter">
+            {Array.from({ length: book.chapters }, (_, i) => i + 1).map((n) => (
+              <option key={n} value={n}>
+                {n}
+              </option>
+            ))}
+          </select>
         </span>
         <button onClick={nextChapter} disabled={chapter === book.chapters}>
           Next →
@@ -135,23 +169,51 @@ function BookReader({ book }) {
       )}
 
       {verses.length > 0 && (
-        <div
-          key={loadedChapter}
-          className={`reader-text ${
-            direction === "next" ? "page-forward" : "page-backward"
-          }`}>
-          {verses.map((verse) => (
-            <p
-              key={verse.verse}
-              id={`verse-${verse.verse}`}
-              className={`reader-verse ${
-                verse.verse === targetVerse ? "verse-highlight" : ""
-              }`}>
-              <span className="verse-number">{verse.verse}</span>
-              {verse.text.trim()}
-            </p>
-          ))}
-        </div>
+        <>
+          <div
+            key={loadedChapter}
+            className={`reader-text ${
+              direction === "next" ? "page-forward" : "page-backward"
+            } ${loading ? "reader-text-loading" : ""}`}>
+            {verses.map((verse) => (
+              <p
+                key={verse.verse}
+                id={`verse-${verse.verse}`}
+                className={`reader-verse ${
+                  verse.verse === targetVerse ? "verse-highlight" : ""
+                }`}>
+                <span className="verse-number">{verse.verse}</span>
+                {verse.text.trim()}
+              </p>
+            ))}
+          </div>
+
+          {/* Bottom controls — mirror the top so readers don't scroll up */}
+          <div className="reader-controls reader-controls-bottom">
+            <button onClick={prevChapter} disabled={chapter === 1}>
+              ← Prev
+            </button>
+            <span className="reader-chapter">
+              {book.name}{" "}
+              <select
+                className="chapter-select"
+                value={chapter}
+                onChange={(e) => jumpToChapter(Number(e.target.value))}
+                aria-label="Jump to chapter">
+                {Array.from({ length: book.chapters }, (_, i) => i + 1).map(
+                  (n) => (
+                    <option key={n} value={n}>
+                      {n}
+                    </option>
+                  ),
+                )}
+              </select>
+            </span>
+            <button onClick={nextChapter} disabled={chapter === book.chapters}>
+              Next →
+            </button>
+          </div>
+        </>
       )}
     </div>
   );
