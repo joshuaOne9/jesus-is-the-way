@@ -1344,12 +1344,23 @@
 
 .verse-number {
   display: inline-block;
-  min-width: 18px;
-  color: #9a6b1f;
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 0.65em;
   vertical-align: super;
+  color: #5c1a1a;
+  font-weight: 700;
   margin-right: 5px;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+.reader-text .reader-verse:first-of-type::first-letter {
+  font-family: Georgia, "Cormorant Garamond", "Times New Roman", serif;
+  font-size: 3.4em;
+  font-weight: 700;
+  color: #d4af37;
+  float: left;
+  line-height: 0.85;
+  margin: 4px 8px 0 0;
 }
 
 /* ---- page-turn animation (reversed direction) ---- */
@@ -1440,4 +1451,8 @@
   border-radius: 0 0 8px 8px;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
+}
+
+.reader-text {
+  display: flow-root; /* was: overflow: hidden */
 }

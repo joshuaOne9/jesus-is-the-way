@@ -12,7 +12,6 @@ function BookReader({ book }) {
   const [targetVerse, setTargetVerse] = useState(null);
 
   const readerRef = useRef(null);
-  const isFirstRender = useRef(true);
 
   useEffect(() => {
     let cancelled = false;
@@ -63,18 +62,6 @@ function BookReader({ book }) {
       cancelled = true;
     };
   }, [book.name, chapter, reloadKey]);
-
-  // Scroll the reader into view whenever the chapter changes — except on
-  // first mount, and except when a specific verse was searched (that has
-  // its own scroll logic below).
-  useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
-    if (targetVerse) return;
-    readerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, [chapter, targetVerse]);
 
   // Scroll to and highlight a searched verse once the chapter has loaded
   useEffect(() => {
