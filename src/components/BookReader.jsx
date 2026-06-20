@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
+import TRANSLATIONS from "../lib/translations";
 
 function BookReader({ book }) {
   const [chapter, setChapter] = useState(1);
@@ -10,8 +11,7 @@ function BookReader({ book }) {
   const [direction, setDirection] = useState("next");
   const [jump, setJump] = useState("");
   const [targetVerse, setTargetVerse] = useState(null);
-
-  const readerRef = useRef(null);
+  const [translation, setTranslation] = useState("kjv");
 
   useEffect(() => {
     let cancelled = false;
@@ -22,7 +22,7 @@ function BookReader({ book }) {
       try {
         const reference = encodeURIComponent(`${book.name} ${chapter}`);
         const res = await fetch(
-          `https://bible-api.com/${reference}?translation=kjv`,
+          `https://bible-api.com/${reference}?translation=${translation}`,
         );
 
         if (res.status === 429) throw new Error("rate-limit");
@@ -61,7 +61,7 @@ function BookReader({ book }) {
     return () => {
       cancelled = true;
     };
-  }, [book.name, chapter, reloadKey]);
+  }, [book.name, chapter, reloadKey, translation]);
 
   // Scroll to and highlight a searched verse once the chapter has loaded
   useEffect(() => {
@@ -104,10 +104,7 @@ function BookReader({ book }) {
   }
 
   return (
-    <div
-      className="book-reader"
-      ref={readerRef}
-      onClick={(e) => e.stopPropagation()}>
+    <div className="book-reader" onClick={(e) => e.stopPropagation()}>
       <div className="reader-controls">
         <button onClick={prevChapter} disabled={chapter === 1}>
           ← Prev
@@ -129,6 +126,21 @@ function BookReader({ book }) {
         <button onClick={nextChapter} disabled={chapter === book.chapters}>
           Next →
         </button>
+      </div>
+
+      <div className="reader-translation">
+        <label htmlFor="translation-select">Translation:</label>
+        <select
+          id="translation-select"
+          className="chapter-select translation-select"
+          value={translation}
+          onChange={(e) => setTranslation(e.target.value)}>
+          {TRANSLATIONS.map((t) => (
+            <option key={t.id} value={t.id}>
+              {t.label}
+            </option>
+          ))}
+        </select>
       </div>
 
       <form className="reader-search" onSubmit={goToReference}>
@@ -158,7 +170,7 @@ function BookReader({ book }) {
       {verses.length > 0 && (
         <>
           <div
-            key={loadedChapter}
+            key={`${loadedChapter}-${translation}`}
             className={`reader-text ${
               direction === "next" ? "page-forward" : "page-backward"
             } ${loading ? "reader-text-loading" : ""}`}>

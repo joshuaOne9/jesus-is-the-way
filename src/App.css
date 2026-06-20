@@ -1456,3 +1456,22 @@
 .reader-text {
   display: flow-root; /* was: overflow: hidden */
 }
+
+.reader-translation {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  font-size: 0.9em;
+  opacity: 0.85;
+  color: #5c1a1a;
+}
+
+.reader-translation label {
+  font-weight: 500;
+}
+
+.translation-select {
+  font-weight: 500 !important;
+  min-width: 200px;
+}
