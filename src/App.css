@@ -1480,3 +1480,95 @@
   color: #b71c1c;
   font-weight: 500;
 }
+
+.book-context {
+  margin-top: 32px;
+  border-top: 2px solid rgba(107, 31, 31, 0.35);
+  padding-top: 8px;
+}
+
+.context-toggle {
+  background: none;
+  border: none;
+  color: #4a2511;
+  font-weight: 700;
+  font-size: 1em;
+  cursor: pointer;
+  padding: 14px 4px;
+  width: 100%;
+  text-align: left;
+  letter-spacing: 0.04em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: color 150ms ease;
+}
+
+.context-toggle:hover {
+  color: #2c1810;
+}
+
+.context-content {
+  padding: 12px 8px 20px;
+  color: #2c1810;
+  animation: contextFadeIn 200ms ease;
+}
+
+@keyframes contextFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.context-section {
+  margin-bottom: 22px;
+}
+
+.context-section p {
+  margin: 4px 0 0;
+  line-height: 1.65;
+}
+
+.context-list-item {
+  margin: 10px 0;
+  padding-left: 14px;
+  border-left: 2px solid rgba(107, 31, 31, 0.3);
+  line-height: 1.55;
+}
+
+.context-list-item strong {
+  color: #2c1810;
+  font-weight: 700;
+}
+
+.context-status {
+  padding: 20px 8px;
+  font-style: italic;
+  text-align: center;
+}
+
+.context-error {
+  color: #6b1f1f;
+  font-style: normal;
+}
+
+.context-error button {
+  margin-left: 10px;
+  background: transparent;
+  border: 1px solid #6b1f1f;
+  color: #6b1f1f;
+  padding: 4px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+
+.context-error button:hover {
+  background: #6b1f1f;
+  color: #fff;
+}

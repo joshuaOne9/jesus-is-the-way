@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import TRANSLATIONS from "../lib/translations";
 import BOOK_CODES from "../lib/bookCodes";
+import { getCachedContext, setCachedContext } from "../lib/bookContextCache";
 
 const DEFAULT_TRANSLATION = TRANSLATIONS[0].id;
 
-// Parse API.Bible's HTML chapter response into verses with segments.
-// Each segment knows whether it's part of Jesus's words (class="wj").
 function parseChapter(html) {
   if (!html) return [];
 
@@ -81,11 +80,10 @@ function BookReader({ book }) {
         }
       }
     } catch {
-      // localStorage unavailable or corrupted JSON
+      // localStorage unavailable
     }
     return 1;
   });
-
   const [verses, setVerses] = useState([]);
   const [loadedChapter, setLoadedChapter] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -94,7 +92,6 @@ function BookReader({ book }) {
   const [direction, setDirection] = useState("next");
   const [jump, setJump] = useState("");
   const [targetVerse, setTargetVerse] = useState(null);
-
   const [translation, setTranslation] = useState(() => {
     try {
       const stored = localStorage.getItem("preferred-translation");
@@ -102,10 +99,16 @@ function BookReader({ book }) {
         return stored;
       }
     } catch {
-      // localStorage unavailable (private browsing, etc.)
+      // localStorage unavailable
     }
     return DEFAULT_TRANSLATION;
   });
+  const [showContext, setShowContext] = useState(false);
+  const [bookContext, setBookContext] = useState(() =>
+    getCachedContext(book.name),
+  );
+  const [contextLoading, setContextLoading] = useState(false);
+  const [contextError, setContextError] = useState(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -175,7 +178,7 @@ function BookReader({ book }) {
     try {
       localStorage.setItem("preferred-translation", translation);
     } catch {
-      // localStorage unavailable, fail silently
+      // localStorage unavailable
     }
   }, [translation]);
 
@@ -186,7 +189,7 @@ function BookReader({ book }) {
       progress[book.name] = chapter;
       localStorage.setItem("book-progress", JSON.stringify(progress));
     } catch {
-      // localStorage unavailable, fail silently
+      // localStorage unavailable
     }
   }, [book.name, chapter]);
 
@@ -219,6 +222,35 @@ function BookReader({ book }) {
     setChapter(ch);
     setTargetVerse(vs);
     setJump("");
+  }
+
+  async function loadContext() {
+    setContextLoading(true);
+    setContextError(null);
+    try {
+      const res = await fetch(
+        `/api/book-context?book=${encodeURIComponent(book.name)}`,
+      );
+      if (!res.ok) {
+        const errorBody = await res.json().catch(() => ({}));
+        throw new Error(errorBody.error || `Status ${res.status}`);
+      }
+      const data = await res.json();
+      setBookContext(data);
+      setCachedContext(book.name, data);
+    } catch (err) {
+      setContextError(err.message);
+    } finally {
+      setContextLoading(false);
+    }
+  }
+
+  function toggleContext() {
+    const opening = !showContext;
+    setShowContext(opening);
+    if (opening && !bookContext && !contextLoading) {
+      loadContext();
+    }
   }
 
   return (
@@ -337,6 +369,93 @@ function BookReader({ book }) {
           </div>
         </>
       )}
+
+      <div className="book-context">
+        <button
+          className="context-toggle"
+          onClick={toggleContext}
+          aria-expanded={showContext}>
+          About this book {showContext ? "▲" : "▼"}
+        </button>
+
+        {showContext && (
+          <div className="context-content">
+            {contextLoading && (
+              <p className="context-status">
+                Loading scholarly context for {book.name}…
+              </p>
+            )}
+
+            {contextError && (
+              <p className="context-status context-error">
+                Couldn't load context: {contextError}{" "}
+                <button onClick={loadContext}>Try again</button>
+              </p>
+            )}
+
+            {bookContext && !contextLoading && (
+              <>
+                <div className="context-section">
+                  <div className="meta-label">AUTHOR</div>
+                  <p>{bookContext.author}</p>
+                </div>
+
+                <div className="context-section">
+                  <div className="meta-label">DATE</div>
+                  <p>{bookContext.date}</p>
+                </div>
+
+                <div className="context-section">
+                  <div className="meta-label">AUDIENCE</div>
+                  <p>{bookContext.audience}</p>
+                </div>
+
+                <div className="context-section">
+                  <div className="meta-label">HISTORICAL SETTING</div>
+                  <p>{bookContext.historicalSetting}</p>
+                </div>
+
+                <div className="context-section">
+                  <div className="meta-label">PURPOSE</div>
+                  <p>{bookContext.purpose}</p>
+                </div>
+
+                <div className="context-section">
+                  <div className="meta-label">NARRATIVE</div>
+                  <p>{bookContext.narrative}</p>
+                </div>
+
+                {bookContext.keyCharacters?.length > 0 && (
+                  <div className="context-section">
+                    <div className="meta-label">KEY CHARACTERS</div>
+                    {bookContext.keyCharacters.map((char, i) => (
+                      <div key={i} className="context-list-item">
+                        <strong>{char.name}</strong> — {char.significance}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {bookContext.themes?.length > 0 && (
+                  <div className="context-section">
+                    <div className="meta-label">THEMES</div>
+                    {bookContext.themes.map((theme, i) => (
+                      <div key={i} className="context-list-item">
+                        <strong>{theme.name}</strong> — {theme.description}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                <div className="context-section">
+                  <div className="meta-label">PRINCIPLES FOR TODAY</div>
+                  <p>{bookContext.principles}</p>
+                </div>
+              </>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
