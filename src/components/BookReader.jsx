@@ -1,5 +1,23 @@
 import { useState, useEffect } from "react";
 import TRANSLATIONS from "../lib/translations";
+import BOOK_CODES from "../lib/bookCodes";
+
+const DEFAULT_TRANSLATION = TRANSLATIONS[0].id;
+
+// Parse API.Bible's plain-text chapter response into { verse, text } objects.
+// Input looks like: "The Creation\n     [1] In the beginning... [2] And the earth..."
+function parseChapter(content) {
+  const verses = [];
+  const regex = /\[(\d+)\]\s*([^[]+)/g;
+  let match;
+  while ((match = regex.exec(content)) !== null) {
+    verses.push({
+      verse: parseInt(match[1], 10),
+      text: match[2].trim().replace(/\s+/g, " "),
+    });
+  }
+  return verses;
+}
 
 function BookReader({ book }) {
   const [chapter, setChapter] = useState(1);
@@ -11,7 +29,7 @@ function BookReader({ book }) {
   const [direction, setDirection] = useState("next");
   const [jump, setJump] = useState("");
   const [targetVerse, setTargetVerse] = useState(null);
-  const [translation, setTranslation] = useState("kjv");
+  const [translation, setTranslation] = useState(DEFAULT_TRANSLATION);
 
   useEffect(() => {
     let cancelled = false;
@@ -20,17 +38,23 @@ function BookReader({ book }) {
       setLoading(true);
       setError(null);
       try {
-        const reference = encodeURIComponent(`${book.name} ${chapter}`);
+        const bookCode = BOOK_CODES[book.name];
+        if (!bookCode) {
+          throw new Error(`No book code mapping for "${book.name}"`);
+        }
+        const chapterId = `${bookCode}.${chapter}`;
         const res = await fetch(
-          `https://bible-api.com/${reference}?translation=${translation}`,
+          `/api/scripture?bibleId=${translation}&chapterId=${chapterId}`,
         );
 
         if (res.status === 429) throw new Error("rate-limit");
         if (!res.ok) throw new Error("bad-response");
 
-        const data = await res.json();
+        const payload = await res.json();
         if (cancelled) return;
-        setVerses(data.verses || []);
+
+        const parsedVerses = parseChapter(payload?.data?.content || "");
+        setVerses(parsedVerses);
         setLoadedChapter(chapter);
         setLoading(false);
       } catch (err) {
@@ -182,7 +206,7 @@ function BookReader({ book }) {
                   verse.verse === targetVerse ? "verse-highlight" : ""
                 }`}>
                 <span className="verse-number">{verse.verse}</span>
-                {verse.text.trim()}
+                {verse.text}
               </p>
             ))}
           </div>

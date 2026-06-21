@@ -1,11 +1,7 @@
 const TRANSLATIONS = [
-  { id: "kjv", label: "KJV — King James Version" },
-  { id: "web", label: "WEB — World English Bible" },
-  { id: "webbe", label: "WEBBE — World English Bible (British)" },
-  { id: "oeb-cw", label: "OEB — Open English Bible (Commonwealth)" },
-  { id: "oeb-us", label: "OEB — Open English Bible (US)" },
-  { id: "bbe", label: "BBE — Bible in Basic English" },
-  { id: "clementine", label: "Latin Vulgate (Clementine)" },
+  { id: "a6aee10bb058511c-01", label: "KJV — King James Version" },
+  { id: "78a9f6124f344018-01", label: "NIV — New International Version" },
+  { id: "d6e14a625393b4da-01", label: "NLT — New Living Translation" },
 ];
 
 export default TRANSLATIONS;
