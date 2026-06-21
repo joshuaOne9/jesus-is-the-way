@@ -75,7 +75,18 @@ function BookReader({ book }) {
   const [direction, setDirection] = useState("next");
   const [jump, setJump] = useState("");
   const [targetVerse, setTargetVerse] = useState(null);
-  const [translation, setTranslation] = useState(DEFAULT_TRANSLATION);
+
+  const [translation, setTranslation] = useState(() => {
+    try {
+      const stored = localStorage.getItem("preferred-translation");
+      if (stored && TRANSLATIONS.some((t) => t.id === stored)) {
+        return stored;
+      }
+    } catch {
+      // localStorage unavailable (private browsing, etc.)
+    }
+    return DEFAULT_TRANSLATION;
+  });
 
   useEffect(() => {
     let cancelled = false;
@@ -140,6 +151,14 @@ function BookReader({ book }) {
     const t = setTimeout(() => setTargetVerse(null), 2500);
     return () => clearTimeout(t);
   }, [targetVerse, loadedChapter, verses]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("preferred-translation", translation);
+    } catch {
+      // localStorage unavailable, fail silently
+    }
+  }, [translation]);
 
   function prevChapter() {
     setDirection("prev");
