@@ -66,7 +66,26 @@ function parseChapter(html) {
 }
 
 function BookReader({ book }) {
-  const [chapter, setChapter] = useState(1);
+  const [chapter, setChapter] = useState(() => {
+    try {
+      const stored = localStorage.getItem("book-progress");
+      if (stored) {
+        const progress = JSON.parse(stored);
+        const lastChapter = progress[book.name];
+        if (
+          typeof lastChapter === "number" &&
+          lastChapter >= 1 &&
+          lastChapter <= book.chapters
+        ) {
+          return lastChapter;
+        }
+      }
+    } catch {
+      // localStorage unavailable or corrupted JSON
+    }
+    return 1;
+  });
+
   const [verses, setVerses] = useState([]);
   const [loadedChapter, setLoadedChapter] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -159,6 +178,17 @@ function BookReader({ book }) {
       // localStorage unavailable, fail silently
     }
   }, [translation]);
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem("book-progress");
+      const progress = stored ? JSON.parse(stored) : {};
+      progress[book.name] = chapter;
+      localStorage.setItem("book-progress", JSON.stringify(progress));
+    } catch {
+      // localStorage unavailable, fail silently
+    }
+  }, [book.name, chapter]);
 
   function prevChapter() {
     setDirection("prev");
