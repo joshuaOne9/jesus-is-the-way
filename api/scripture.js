@@ -18,8 +18,11 @@ export default async function handler(req, res) {
     const url = new URL(
       `https://api.scripture.api.bible/v1/bibles/${bibleId}/chapters/${chapterId}`,
     );
-    url.searchParams.set("content-type", "text");
+    url.searchParams.set("content-type", "html");
     url.searchParams.set("include-verse-numbers", "true");
+    url.searchParams.set("include-titles", "false");
+    url.searchParams.set("include-notes", "false");
+    url.searchParams.set("include-chapter-numbers", "false");
 
     const response = await fetch(url.toString(), {
       headers: { "api-key": apiKey },

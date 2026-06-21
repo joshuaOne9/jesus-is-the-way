@@ -4,18 +4,64 @@ import BOOK_CODES from "../lib/bookCodes";
 
 const DEFAULT_TRANSLATION = TRANSLATIONS[0].id;
 
-// Parse API.Bible's plain-text chapter response into { verse, text } objects.
-// Input looks like: "The Creation\n     [1] In the beginning... [2] And the earth..."
-function parseChapter(content) {
+// Parse API.Bible's HTML chapter response into verses with segments.
+// Each segment knows whether it's part of Jesus's words (class="wj").
+function parseChapter(html) {
+  if (!html) return [];
+
+  const doc = new DOMParser().parseFromString(html, "text/html");
+  const walker = doc.createTreeWalker(
+    doc.body,
+    NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT,
+  );
+
   const verses = [];
-  const regex = /\[(\d+)\]\s*([^[]+)/g;
-  let match;
-  while ((match = regex.exec(content)) !== null) {
-    verses.push({
-      verse: parseInt(match[1], 10),
-      text: match[2].trim().replace(/\s+/g, " "),
-    });
+  let currentVerse = null;
+
+  let node;
+  while ((node = walker.nextNode())) {
+    if (node.nodeType === Node.ELEMENT_NODE) {
+      if (node.classList.contains("v")) {
+        const num = parseInt(node.getAttribute("data-number"), 10);
+        currentVerse = { verse: num, segments: [] };
+        verses.push(currentVerse);
+      }
+      continue;
+    }
+
+    if (node.nodeType !== Node.TEXT_NODE || !currentVerse) continue;
+    if (node.parentElement?.classList?.contains("v")) continue;
+
+    let isJesus = false;
+    let el = node.parentElement;
+    while (el && el !== doc.body) {
+      if (el.classList?.contains("wj")) {
+        isJesus = true;
+        break;
+      }
+      el = el.parentElement;
+    }
+
+    const text = node.textContent;
+    const last = currentVerse.segments[currentVerse.segments.length - 1];
+    if (last && last.isJesus === isJesus) {
+      last.text += text;
+    } else {
+      currentVerse.segments.push({ text, isJesus });
+    }
   }
+
+  verses.forEach((v) => {
+    v.segments = v.segments
+      .map((s) => ({ ...s, text: s.text.replace(/\s+/g, " ") }))
+      .filter((s) => s.text.trim().length > 0);
+    if (v.segments.length > 0) {
+      v.segments[0].text = v.segments[0].text.trimStart();
+      const last = v.segments[v.segments.length - 1];
+      last.text = last.text.trimEnd();
+    }
+  });
+
   return verses;
 }
 
@@ -87,7 +133,6 @@ function BookReader({ book }) {
     };
   }, [book.name, chapter, reloadKey, translation]);
 
-  // Scroll to and highlight a searched verse once the chapter has loaded
   useEffect(() => {
     if (!targetVerse || loadedChapter == null) return;
     const el = document.getElementById(`verse-${targetVerse}`);
@@ -206,12 +251,17 @@ function BookReader({ book }) {
                   verse.verse === targetVerse ? "verse-highlight" : ""
                 }`}>
                 <span className="verse-number">{verse.verse}</span>
-                {verse.text}
+                {verse.segments.map((seg, i) => (
+                  <span
+                    key={i}
+                    className={seg.isJesus ? "verse-red-letter" : ""}>
+                    {seg.text}
+                  </span>
+                ))}
               </p>
             ))}
           </div>
 
-          {/* Bottom controls — mirror the top so readers don't scroll up */}
           <div className="reader-controls reader-controls-bottom">
             <button onClick={prevChapter} disabled={chapter === 1}>
               ← Prev

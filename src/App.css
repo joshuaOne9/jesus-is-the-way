@@ -1475,3 +1475,8 @@
   font-weight: 500 !important;
   min-width: 200px;
 }
+
+.verse-red-letter {
+  color: #b71c1c;
+  font-weight: 500;
+}
