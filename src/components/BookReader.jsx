@@ -5,6 +5,7 @@ import { getCachedContext, setCachedContext } from "../lib/bookContextCache";
 import { useHighlightCategories } from "../hooks/useHighlightCategories";
 import { useVerseMarks } from "../hooks/useVerseMarks";
 import VerseMarkModal from "./VerseMarkModal";
+import JournalDrawer from "./JournalDrawer";
 
 const DEFAULT_TRANSLATION = TRANSLATIONS[0].id;
 
@@ -518,6 +519,7 @@ function BookReader({ book, user }) {
           onCreateCategory={createCategory}
         />
       )}
+      <JournalDrawer user={user} currentReference={`${book.name} ${chapter}`} />
     </div>
   );
 }
