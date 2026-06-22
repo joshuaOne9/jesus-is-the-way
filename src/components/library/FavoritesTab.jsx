@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { BEINGS, CATEGORY_COLORS } from "../data/beings";
-import { BOOKS, GENRE_COLORS } from "../data/books";
-import { supabase } from "../lib/supabase";
-import { useFavorites } from "../hooks/useFavorites";
-import { getYouTubeEmbedUrl } from "../lib/youtube";
-import BookReader from "./BookReader";
+import { BEINGS, CATEGORY_COLORS } from "../../data/beings";
+import { BOOKS, GENRE_COLORS } from "../../data/books";
+import { supabase } from "../../lib/supabase";
+import { useFavorites } from "../../hooks/useFavorites";
+import { getYouTubeEmbedUrl } from "../../lib/youtube";
+import BookReader from "../BookReader";
 
-function Favorites({ user }) {
+function FavoritesTab({ user }) {
   const { favorites, loading, toggleFavorite } = useFavorites(user);
   const [favVideos, setFavVideos] = useState([]);
   const [activeKey, setActiveKey] = useState(null);
@@ -40,25 +40,8 @@ function Favorites({ user }) {
     setActiveKey((prev) => (prev === key ? null : key));
   }
 
-  if (!user) {
-    return (
-      <section className="page">
-        <header className="page-header">
-          <p className="page-eyebrow">Account</p>
-          <h1>My Favorites</h1>
-          <div className="page-divider"></div>
-        </header>
-        <p>Sign in to save and view your favorites.</p>
-      </section>
-    );
-  }
-
   if (loading) {
-    return (
-      <section className="page">
-        <p>Loading favorites...</p>
-      </section>
-    );
+    return <p>Loading favorites...</p>;
   }
 
   const beingFavorites = favorites
@@ -77,20 +60,11 @@ function Favorites({ user }) {
     favVideos.length === 0;
 
   return (
-    <section className="page">
-      <header className="page-header">
-        <p className="page-eyebrow">Account</p>
-        <h1>My Favorites</h1>
-        <div className="page-divider"></div>
-        <p className="page-intro">
-          Everything you've saved. Click any card to open it.
-        </p>
-      </header>
-
+    <div className="favorites-tab">
       {nothingSaved && (
         <p>
           You haven't saved anything yet. Tap the cross on any being, book, or
-          video to save it.
+          video to save it here.
         </p>
       )}
 
@@ -252,8 +226,8 @@ function Favorites({ user }) {
           </div>
         </>
       )}
-    </section>
+    </div>
   );
 }
 
-export default Favorites;
+export default FavoritesTab;

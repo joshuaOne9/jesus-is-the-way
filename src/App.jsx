@@ -11,7 +11,7 @@ import { useAuth } from "./hooks/useAuth";
 import Auth from "./components/Auth";
 import ResetPassword from "./components/ResetPassword";
 import Members from "./components/Members";
-import Favorites from "./components/Favorites";
+import Library from "./components/Library";
 
 function App() {
   const { user, loading, recovering, setRecovering } = useAuth();
@@ -49,7 +49,7 @@ function App() {
       {currentPage === "ask" && <Ask />}
       {currentPage === "account" && <Auth user={user} />}
       {currentPage === "members" && <Members />}
-      {currentPage === "favorites" && <Favorites user={user} />}
+      {currentPage === "library" && <Library user={user} />}
       {currentPage === "books" && <Books user={user} />}
       {currentPage === "videos" && <Videos user={user} />}
     </>

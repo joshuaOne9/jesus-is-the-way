@@ -2030,3 +2030,40 @@ body {
 body.journal-open {
   padding-right: 400px;
 }
+
+.library-tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 2px solid rgba(107, 31, 31, 0.25);
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.library-tab {
+  background: none;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1em;
+  font-weight: 600;
+  color: #5c4030;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: all 150ms ease;
+}
+
+.library-tab:hover {
+  color: #2c1810;
+}
+
+.library-tab.active {
+  color: #6b1f1f;
+  border-bottom-color: #6b1f1f;
+}
+
+.library-coming-soon {
+  text-align: center;
+  padding: 60px 20px;
+  font-style: italic;
+  color: #5c4030;
+}
