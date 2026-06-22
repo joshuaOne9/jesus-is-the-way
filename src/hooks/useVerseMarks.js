@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "../lib/supabase";
 
 export function useVerseMarks(user, bookName, chapter) {
@@ -6,33 +6,39 @@ export function useVerseMarks(user, bookName, chapter) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const fetchMarks = useCallback(async () => {
+  useEffect(() => {
     if (!user || !bookName || !chapter) {
-      setMarks({});
-      setLoading(false);
       return;
     }
-    setLoading(true);
-    setError(null);
-    const { data, error: err } = await supabase
-      .from("verse_marks")
-      .select("*")
-      .eq("book_name", bookName)
-      .eq("chapter", chapter);
-    if (err) setError(err.message);
-    else {
-      const map = {};
-      (data || []).forEach((m) => {
-        map[m.verse] = m;
-      });
-      setMarks(map);
-    }
-    setLoading(false);
-  }, [user, bookName, chapter]);
 
-  useEffect(() => {
-    fetchMarks();
-  }, [fetchMarks]);
+    let cancelled = false;
+
+    (async () => {
+      const { data, error: err } = await supabase
+        .from("verse_marks")
+        .select("*")
+        .eq("book_name", bookName)
+        .eq("chapter", chapter);
+
+      if (cancelled) return;
+
+      if (err) {
+        setError(err.message);
+      } else {
+        const map = {};
+        (data || []).forEach((m) => {
+          map[m.verse] = m;
+        });
+        setMarks(map);
+        setError(null);
+      }
+      setLoading(false);
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [user, bookName, chapter]);
 
   async function upsertMark(verse, { categoryId = null, note = null }) {
     if (!user) return null;

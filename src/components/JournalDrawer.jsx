@@ -1,11 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useJournal } from "../hooks/useJournal";
+import { createPortal } from "react-dom";
 
 function JournalDrawer({ user, currentReference }) {
   const [isOpen, setIsOpen] = useState(false);
   const [editingMode, setEditingMode] = useState(null);
   const { entries, loading, createEntry, updateEntry, deleteEntry } =
     useJournal(user);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add("journal-open");
+    } else {
+      document.body.classList.remove("journal-open");
+    }
+
+    return () => {
+      document.body.classList.remove("journal-open");
+    };
+  }, [isOpen]);
 
   if (!user) return null;
 
@@ -18,7 +31,7 @@ function JournalDrawer({ user, currentReference }) {
     setEditingMode(null);
   }
 
-  return (
+  return createPortal(
     <>
       <button
         type="button"
@@ -70,7 +83,8 @@ function JournalDrawer({ user, currentReference }) {
           )}
         </div>
       </aside>
-    </>
+    </>,
+    document.body,
   );
 }
 

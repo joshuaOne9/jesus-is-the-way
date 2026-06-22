@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "../lib/supabase";
 
 export function useHighlightCategories(user) {
@@ -6,26 +6,34 @@ export function useHighlightCategories(user) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const fetchCategories = useCallback(async () => {
+  useEffect(() => {
     if (!user) {
-      setCategories([]);
-      setLoading(false);
       return;
     }
-    setLoading(true);
-    setError(null);
-    const { data, error: err } = await supabase
-      .from("highlight_categories")
-      .select("*")
-      .order("created_at", { ascending: true });
-    if (err) setError(err.message);
-    else setCategories(data || []);
-    setLoading(false);
-  }, [user]);
 
-  useEffect(() => {
-    fetchCategories();
-  }, [fetchCategories]);
+    let cancelled = false;
+
+    (async () => {
+      const { data, error: err } = await supabase
+        .from("highlight_categories")
+        .select("*")
+        .order("created_at", { ascending: true });
+
+      if (cancelled) return;
+
+      if (err) {
+        setError(err.message);
+      } else {
+        setCategories(data || []);
+        setError(null);
+      }
+      setLoading(false);
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [user]);
 
   async function createCategory(name, color) {
     if (!user) return null;

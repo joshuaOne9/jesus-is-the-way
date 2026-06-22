@@ -2022,3 +2022,11 @@
   margin-top: 8px;
   flex-wrap: wrap;
 }
+
+body {
+  transition: padding-right 250ms ease;
+}
+
+body.journal-open {
+  padding-right: 400px;
+}

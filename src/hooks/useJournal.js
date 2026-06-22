@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "../lib/supabase";
 
 export function useJournal(user) {
@@ -6,26 +6,34 @@ export function useJournal(user) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const fetchEntries = useCallback(async () => {
+  useEffect(() => {
     if (!user) {
-      setEntries([]);
-      setLoading(false);
       return;
     }
-    setLoading(true);
-    setError(null);
-    const { data, error: err } = await supabase
-      .from("journal_entries")
-      .select("*")
-      .order("created_at", { ascending: false });
-    if (err) setError(err.message);
-    else setEntries(data || []);
-    setLoading(false);
-  }, [user]);
 
-  useEffect(() => {
-    fetchEntries();
-  }, [fetchEntries]);
+    let cancelled = false;
+
+    (async () => {
+      const { data, error: err } = await supabase
+        .from("journal_entries")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (cancelled) return;
+
+      if (err) {
+        setError(err.message);
+      } else {
+        setEntries(data || []);
+        setError(null);
+      }
+      setLoading(false);
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [user]);
 
   async function createEntry({ title, content, tags = [] }) {
     if (!user) return null;
