@@ -1572,3 +1572,259 @@
   background: #6b1f1f;
   color: #fff;
 }
+
+/* Verse highlight (when category is applied) */
+.verse-marked {
+  border-radius: 4px;
+  padding: 4px 6px;
+  transition: background-color 200ms ease;
+}
+
+/* Note icon next to verse number */
+.verse-note-icon {
+  display: inline-block;
+  margin: 0 4px;
+  font-size: 0.85em;
+  vertical-align: middle;
+  cursor: default;
+}
+
+/* === Modal === */
+.verse-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: backdropFadeIn 150ms ease;
+}
+
+@keyframes backdropFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.verse-modal {
+  background: #f8f1e0;
+  border-radius: 10px;
+  padding: 24px;
+  width: 90%;
+  max-width: 480px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  animation: modalSlideIn 200ms ease;
+  color: #2c1810;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.verse-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(107, 31, 31, 0.2);
+}
+
+.verse-modal-header h3 {
+  margin: 0;
+  font-size: 1.2em;
+  font-weight: 700;
+  color: #2c1810;
+}
+
+.verse-modal-close {
+  background: none;
+  border: none;
+  font-size: 1.8em;
+  line-height: 1;
+  cursor: pointer;
+  color: #5c4030;
+  padding: 0 8px;
+}
+
+.verse-modal-close:hover {
+  color: #2c1810;
+}
+
+.verse-modal-section {
+  margin-bottom: 20px;
+}
+
+.empty-state {
+  font-style: italic;
+  color: #5c4030;
+  margin: 8px 0;
+}
+
+/* Category chips */
+.category-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.category-chip {
+  padding: 6px 14px;
+  border-radius: 16px;
+  border: 2px solid transparent;
+  font-size: 0.9em;
+  font-weight: 600;
+  cursor: pointer;
+  color: #2c1810;
+  transition: all 150ms ease;
+}
+
+.category-chip:hover {
+  transform: translateY(-1px);
+}
+
+.category-chip.selected {
+  border-color: #2c1810;
+  box-shadow: 0 0 0 2px rgba(44, 24, 16, 0.15);
+}
+
+.category-chip-none {
+  background: #e8dcc4;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: #6b1f1f;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 4px 0;
+  font-size: 0.9em;
+  font-weight: 500;
+}
+
+.link-button:hover {
+  color: #4a1414;
+}
+
+/* New category form */
+.new-category-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 12px;
+  background: rgba(212, 175, 55, 0.1);
+  border-radius: 6px;
+}
+
+.new-category-form input[type="text"] {
+  flex: 1;
+  padding: 6px 10px;
+  border: 1px solid #5c4030;
+  border-radius: 4px;
+  background: #fff;
+  color: #2c1810;
+}
+
+.new-category-form input[type="color"] {
+  width: 40px;
+  height: 32px;
+  border: 1px solid #5c4030;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Note textarea */
+.verse-note-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #5c4030;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.95em;
+  resize: vertical;
+  background: #fff;
+  color: #2c1810;
+  margin-top: 6px;
+}
+
+.verse-note-input:focus {
+  outline: 2px solid #d4af37;
+  outline-offset: -1px;
+}
+
+/* Action buttons */
+.verse-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(107, 31, 31, 0.2);
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-danger {
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-size: 0.95em;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 150ms ease;
+}
+
+.btn-primary {
+  background: #6b1f1f;
+  color: #fff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #4a1414;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #2c1810;
+  border-color: #5c4030;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.btn-danger {
+  background: transparent;
+  color: #6b1f1f;
+  border-color: #6b1f1f;
+  margin-right: auto;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: #6b1f1f;
+  color: #fff;
+}
+
+.btn-primary:disabled,
+.btn-secondary:disabled,
+.btn-danger:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import TRANSLATIONS from "../lib/translations";
 import BOOK_CODES from "../lib/bookCodes";
 import { getCachedContext, setCachedContext } from "../lib/bookContextCache";
+import { useHighlightCategories } from "../hooks/useHighlightCategories";
+import { useVerseMarks } from "../hooks/useVerseMarks";
+import VerseMarkModal from "./VerseMarkModal";
 
 const DEFAULT_TRANSLATION = TRANSLATIONS[0].id;
 
@@ -64,7 +67,7 @@ function parseChapter(html) {
   return verses;
 }
 
-function BookReader({ book }) {
+function BookReader({ book, user }) {
   const [chapter, setChapter] = useState(() => {
     try {
       const stored = localStorage.getItem("book-progress");
@@ -109,6 +112,22 @@ function BookReader({ book }) {
   );
   const [contextLoading, setContextLoading] = useState(false);
   const [contextError, setContextError] = useState(null);
+
+  // Verse mark state
+  const [markingVerse, setMarkingVerse] = useState(null);
+
+  const { categories, createCategory } = useHighlightCategories(user);
+  const { marks, upsertMark, deleteMark } = useVerseMarks(
+    user,
+    book.name,
+    chapter,
+  );
+
+  // Quick lookup: category_id → category object
+  const categoryById = {};
+  categories.forEach((c) => {
+    categoryById[c.id] = c;
+  });
 
   useEffect(() => {
     let cancelled = false;
@@ -253,6 +272,11 @@ function BookReader({ book }) {
     }
   }
 
+  function handleVerseClick(verseNumber) {
+    if (!user) return; // Not logged in — no-op
+    setMarkingVerse(verseNumber);
+  }
+
   return (
     <div className="book-reader" onClick={(e) => e.stopPropagation()}>
       <div className="reader-controls">
@@ -324,23 +348,53 @@ function BookReader({ book }) {
             className={`reader-text ${
               direction === "next" ? "page-forward" : "page-backward"
             } ${loading ? "reader-text-loading" : ""}`}>
-            {verses.map((verse) => (
-              <p
-                key={verse.verse}
-                id={`verse-${verse.verse}`}
-                className={`reader-verse ${
-                  verse.verse === targetVerse ? "verse-highlight" : ""
-                }`}>
-                <span className="verse-number">{verse.verse}</span>
-                {verse.segments.map((seg, i) => (
+            {verses.map((verse) => {
+              const mark = marks[verse.verse];
+              const category = mark?.category_id
+                ? categoryById[mark.category_id]
+                : null;
+              const verseStyle = category
+                ? { backgroundColor: `${category.color}33` }
+                : undefined;
+              const hasNote = mark?.note;
+
+              return (
+                <p
+                  key={verse.verse}
+                  id={`verse-${verse.verse}`}
+                  className={`reader-verse ${
+                    verse.verse === targetVerse ? "verse-highlight" : ""
+                  } ${mark ? "verse-marked" : ""}`}
+                  style={verseStyle}>
                   <span
-                    key={i}
-                    className={seg.isJesus ? "verse-red-letter" : ""}>
-                    {seg.text}
+                    className="verse-number"
+                    onClick={() => handleVerseClick(verse.verse)}
+                    role={user ? "button" : undefined}
+                    tabIndex={user ? 0 : undefined}
+                    onKeyDown={(e) => {
+                      if (user && (e.key === "Enter" || e.key === " ")) {
+                        e.preventDefault();
+                        handleVerseClick(verse.verse);
+                      }
+                    }}
+                    style={user ? { cursor: "pointer" } : undefined}>
+                    {verse.verse}
                   </span>
-                ))}
-              </p>
-            ))}
+                  {hasNote && (
+                    <span className="verse-note-icon" aria-label="Has note">
+                      📝
+                    </span>
+                  )}
+                  {verse.segments.map((seg, i) => (
+                    <span
+                      key={i}
+                      className={seg.isJesus ? "verse-red-letter" : ""}>
+                      {seg.text}
+                    </span>
+                  ))}
+                </p>
+              );
+            })}
           </div>
 
           <div className="reader-controls reader-controls-bottom">
@@ -399,32 +453,26 @@ function BookReader({ book }) {
                   <div className="meta-label">AUTHOR</div>
                   <p>{bookContext.author}</p>
                 </div>
-
                 <div className="context-section">
                   <div className="meta-label">DATE</div>
                   <p>{bookContext.date}</p>
                 </div>
-
                 <div className="context-section">
                   <div className="meta-label">AUDIENCE</div>
                   <p>{bookContext.audience}</p>
                 </div>
-
                 <div className="context-section">
                   <div className="meta-label">HISTORICAL SETTING</div>
                   <p>{bookContext.historicalSetting}</p>
                 </div>
-
                 <div className="context-section">
                   <div className="meta-label">PURPOSE</div>
                   <p>{bookContext.purpose}</p>
                 </div>
-
                 <div className="context-section">
                   <div className="meta-label">NARRATIVE</div>
                   <p>{bookContext.narrative}</p>
                 </div>
-
                 {bookContext.keyCharacters?.length > 0 && (
                   <div className="context-section">
                     <div className="meta-label">KEY CHARACTERS</div>
@@ -435,7 +483,6 @@ function BookReader({ book }) {
                     ))}
                   </div>
                 )}
-
                 {bookContext.themes?.length > 0 && (
                   <div className="context-section">
                     <div className="meta-label">THEMES</div>
@@ -446,7 +493,6 @@ function BookReader({ book }) {
                     ))}
                   </div>
                 )}
-
                 <div className="context-section">
                   <div className="meta-label">PRINCIPLES FOR TODAY</div>
                   <p>{bookContext.principles}</p>
@@ -456,6 +502,22 @@ function BookReader({ book }) {
           </div>
         )}
       </div>
+
+      {markingVerse !== null && (
+        <VerseMarkModal
+          bookName={book.name}
+          chapter={chapter}
+          verse={markingVerse}
+          currentMark={marks[markingVerse]}
+          categories={categories}
+          onSave={({ categoryId, note }) =>
+            upsertMark(markingVerse, { categoryId, note })
+          }
+          onDelete={() => deleteMark(markingVerse)}
+          onClose={() => setMarkingVerse(null)}
+          onCreateCategory={createCategory}
+        />
+      )}
     </div>
   );
 }

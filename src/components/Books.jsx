@@ -121,7 +121,7 @@ function Books({ user }) {
                   <div className="meta-label">KEY FIGURES</div>
                   <p className="book-figures">{book.figures.join(" . ")}</p>
 
-                  <BookReader book={book} />
+                  <BookReader book={book} user={user} />
                 </div>
               )}
             </div>

@@ -178,7 +178,7 @@ function Favorites({ user }) {
                   {isActive && (
                     <div className="book-details">
                       <p className="book-summary">{book.summary}</p>
-                      <BookReader book={book} />
+                      <BookReader book={book} user={user} />
                     </div>
                   )}
                 </div>
