@@ -1,5 +1,6 @@
 import { useState } from "react";
 import FavoritesTab from "./library/FavoritesTab";
+import CategoriesTab from "./library/CategoriesTab";
 
 function Library({ user }) {
   const [activeTab, setActiveTab] = useState("favorites");
@@ -32,14 +33,14 @@ function Library({ user }) {
           Favorites
         </button>
         <button
-          className={`library-tab ${activeTab === "highlights" ? "active" : ""}`}
-          onClick={() => setActiveTab("highlights")}>
-          Highlights & Notes
-        </button>
-        <button
           className={`library-tab ${activeTab === "journal" ? "active" : ""}`}
           onClick={() => setActiveTab("journal")}>
           Journal
+        </button>
+        <button
+          className={`library-tab ${activeTab === "highlights" ? "active" : ""}`}
+          onClick={() => setActiveTab("highlights")}>
+          Highlights & Notes
         </button>
         <button
           className={`library-tab ${activeTab === "categories" ? "active" : ""}`}
@@ -61,11 +62,7 @@ function Library({ user }) {
             Coming soon — full view of your journal with search and filtering.
           </p>
         )}
-        {activeTab === "categories" && (
-          <p className="library-coming-soon">
-            Coming soon — manage and edit your highlight categories.
-          </p>
-        )}
+        {activeTab === "categories" && <CategoriesTab user={user} />}
       </div>
     </section>
   );
