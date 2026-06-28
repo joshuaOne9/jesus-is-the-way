@@ -1,6 +1,7 @@
 import { useState } from "react";
 import FavoritesTab from "./library/FavoritesTab";
 import CategoriesTab from "./library/CategoriesTab";
+import JournalTab from "./library/JournalTab";
 
 function Library({ user }) {
   const [activeTab, setActiveTab] = useState("favorites");
@@ -57,11 +58,8 @@ function Library({ user }) {
             you've marked.
           </p>
         )}
-        {activeTab === "journal" && (
-          <p className="library-coming-soon">
-            Coming soon — full view of your journal with search and filtering.
-          </p>
-        )}
+        {activeTab === "journal" && <JournalTab user={user} />}
+
         {activeTab === "categories" && <CategoriesTab user={user} />}
       </div>
     </section>
