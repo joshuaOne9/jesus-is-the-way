@@ -1,3 +1,5 @@
+import ThemeToggle from "./ThemeToggle";
+
 function Navigation({ currentPage, setCurrentPage, user, loading }) {
   const links = [
     { id: "home", label: "Home" },
@@ -34,6 +36,7 @@ function Navigation({ currentPage, setCurrentPage, user, loading }) {
           </li>
         ))}
       </ul>
+      <ThemeToggle />
     </nav>
   );
 }
