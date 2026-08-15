@@ -23,7 +23,7 @@ function Navigation({ currentPage, setCurrentPage, user, loading }) {
     <nav className="nav">
       <div className="nav-brand">
         <span className="nav-cross">✝</span>
-        <span className="nav-title">Jesus is the Way</span>
+        <span className="nav-title">Born to Be</span>
       </div>
       <ul className="nav-links">
         {links.map((link) => (

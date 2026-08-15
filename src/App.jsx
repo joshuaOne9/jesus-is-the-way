@@ -32,13 +32,18 @@ function App() {
 
       {currentPage === "home" && (
         <div className="hero">
-          <h1>Jesus is the Way</h1>
-          <p className="subtitle">
-            "I am the way, and the truth, and the life." John 14:6
-          </p>
+          <p className="hero-eyebrow">Who Were You</p>
+          <h1>- Born to Be! -</h1>
+          <div className="hero-verse">
+            <p className="hero-verse-text">
+              "Then I heard the voice of the Lord saying, 'Whom shall I send?
+              And who will go for us?' And I said, 'Here am I. Send me!'"
+            </p>
+            <p className="hero-verse-ref">Isaiah 6:8</p>
+          </div>
           <p className="description">
-            A place to explore Scripture, encounter Jesus, and seek context from
-            all books related to The Bible
+            A community called to hear, to grow, and to go. Explore Scripture,
+            study together, and answer the call.
           </p>
         </div>
       )}
