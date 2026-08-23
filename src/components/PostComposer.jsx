@@ -40,7 +40,8 @@ function PostComposer({ user, isOpen, onClose, editingPostId, initialPost }) {
 
   if (!user || !isOpen) return null;
 
-  async function saveDraft() {
+  // Saves title/body. Preserves current status (won't downgrade a published post).
+  async function save() {
     if (!title.trim()) {
       setError("Give your teaching a title before saving.");
       return null;
@@ -74,18 +75,12 @@ function PostComposer({ user, isOpen, onClose, editingPostId, initialPost }) {
   }
 
   async function handlePublish() {
-    // First make sure the draft is saved
-    let saved = { id: postId };
-    if (!postId) {
-      saved = await saveDraft();
-      if (!saved) return;
-    } else {
-      const ok = await saveDraft();
-      if (!ok) return;
-    }
+    // Make sure the latest title/body are saved first
+    const saved = await save();
+    if (!saved) return;
 
     setSaving(true);
-    const result = await updatePost(saved.id || postId, {
+    const result = await updatePost(saved.id, {
       status: "published",
     });
     setSaving(false);
@@ -98,6 +93,23 @@ function PostComposer({ user, isOpen, onClose, editingPostId, initialPost }) {
     setConfirmingPublish(false);
     setSavedAt(new Date());
   }
+
+  // Move a published teaching back to draft (unpublish)
+  async function handleUnpublish() {
+    if (!postId) return;
+    setSaving(true);
+    setError(null);
+    const result = await updatePost(postId, { status: "draft" });
+    setSaving(false);
+    if (result.error) {
+      setError(result.error.message);
+      return;
+    }
+    setStatus("draft");
+    setSavedAt(new Date());
+  }
+
+  const isPublished = status === "published";
 
   return createPortal(
     <aside className={`composer-drawer ${isOpen ? "open" : ""}`}>
@@ -133,10 +145,15 @@ function PostComposer({ user, isOpen, onClose, editingPostId, initialPost }) {
           rows={16}
         />
 
+        <p className="composer-format-hint">
+          Formatting: <code>**bold**</code> · <code>## Heading</code> ·{" "}
+          <code>[link text](https://…)</code> · blank line for new paragraph
+        </p>
+
         {error && <p className="composer-error">{error}</p>}
 
         <div className="composer-status-row">
-          {status === "published" ? (
+          {isPublished ? (
             <span className="composer-badge composer-badge-published">
               Published
             </span>
@@ -155,20 +172,36 @@ function PostComposer({ user, isOpen, onClose, editingPostId, initialPost }) {
         </div>
 
         <div className="composer-actions">
-          <button
-            className="btn-secondary"
-            onClick={saveDraft}
-            disabled={saving}>
-            {saving ? "Saving…" : "Save draft"}
-          </button>
-
-          {status !== "published" && (
-            <button
-              className="composer-publish-btn"
-              onClick={() => setConfirmingPublish(true)}
-              disabled={saving || !title.trim()}>
-              Publish
-            </button>
+          {isPublished ? (
+            <>
+              <button
+                className="btn-secondary"
+                onClick={handleUnpublish}
+                disabled={saving}>
+                Unpublish
+              </button>
+              <button
+                className="composer-publish-btn"
+                onClick={save}
+                disabled={saving || !title.trim()}>
+                {saving ? "Saving…" : "Update"}
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                className="btn-secondary"
+                onClick={save}
+                disabled={saving}>
+                {saving ? "Saving…" : "Save draft"}
+              </button>
+              <button
+                className="composer-publish-btn"
+                onClick={() => setConfirmingPublish(true)}
+                disabled={saving || !title.trim()}>
+                Publish
+              </button>
+            </>
           )}
         </div>
 

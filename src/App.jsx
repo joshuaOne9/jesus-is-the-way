@@ -54,7 +54,6 @@ function App() {
         loading={loading}
       />
 
-      <Feed />
       {currentPage === "home" && (
         <>
           <div className="hero">

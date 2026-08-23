@@ -1,6 +1,11 @@
 function PostCard({ post, onOpen }) {
   const authorName = post.profiles?.display_name || "A teacher";
-  const preview = (post.body || "").slice(0, 220);
+  // Strip common markdown markers for a clean plain-text preview
+  const preview = (post.body || "")
+    .replace(/[#*_`>[\]()]/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 220);
 
   return (
     <article className="post-card" onClick={() => onOpen(post)}>

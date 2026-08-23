@@ -1,3 +1,5 @@
+import ReactMarkdown from "react-markdown";
+
 function PostView({ post, onBack }) {
   const authorName = post.profiles?.display_name || "A teacher";
 
@@ -25,7 +27,9 @@ function PostView({ post, onBack }) {
           </div>
         </header>
 
-        <div className="post-full-body">{post.body}</div>
+        <div className="post-full-body markdown-body">
+          <ReactMarkdown>{post.body || ""}</ReactMarkdown>
+        </div>
       </article>
     </section>
   );
