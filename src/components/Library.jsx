@@ -2,8 +2,9 @@ import { useState } from "react";
 import FavoritesTab from "./library/FavoritesTab";
 import CategoriesTab from "./library/CategoriesTab";
 import JournalTab from "./library/JournalTab";
+import TeachingsTab from "./library/TeachingsTab";
 
-function Library({ user }) {
+function Library({ user, isLeader, onOpenComposer }) {
   const [activeTab, setActiveTab] = useState("favorites");
 
   if (!user) {
@@ -48,6 +49,13 @@ function Library({ user }) {
           onClick={() => setActiveTab("categories")}>
           Categories
         </button>
+        {isLeader && (
+          <button
+            className={`library-tab ${activeTab === "teachings" ? "active" : ""}`}
+            onClick={() => setActiveTab("teachings")}>
+            My Teachings
+          </button>
+        )}
       </nav>
 
       <div className="library-content">
@@ -59,8 +67,10 @@ function Library({ user }) {
           </p>
         )}
         {activeTab === "journal" && <JournalTab user={user} />}
-
         {activeTab === "categories" && <CategoriesTab user={user} />}
+        {activeTab === "teachings" && isLeader && (
+          <TeachingsTab user={user} onOpenComposer={onOpenComposer} />
+        )}
       </div>
     </section>
   );

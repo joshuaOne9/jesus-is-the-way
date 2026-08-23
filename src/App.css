@@ -2853,3 +2853,460 @@ body.journal-open {
   margin: 0;
   text-align: right;
 }
+
+.composer-drawer {
+  position: fixed;
+  top: 0;
+  right: -520px;
+  width: 520px;
+  max-width: 92vw;
+  height: 100vh;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-lg);
+  transition: right 280ms ease;
+  z-index: 1001;
+  overflow-y: auto;
+  color: var(--color-text);
+}
+
+.composer-drawer.open {
+  right: 0;
+}
+
+.composer-inner {
+  padding: 32px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.composer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.composer-eyebrow {
+  color: var(--color-primary);
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin: 0 0 6px;
+  font-weight: 700;
+}
+
+.composer-header h2 {
+  margin: 0;
+  font-size: 1.6em;
+  color: var(--color-text);
+}
+
+.composer-close {
+  background: none;
+  border: none;
+  font-size: 2em;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  padding: 0 4px;
+}
+
+.composer-close:hover {
+  color: var(--color-text);
+}
+
+.composer-scripture {
+  font-family: "EB Garamond", Georgia, serif;
+  font-style: italic;
+  color: var(--color-accent);
+  font-size: 1.05em;
+  margin: 0 0 8px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.composer-title {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 8px;
+  background: var(--color-surface-2);
+  color: var(--color-text);
+  font-family: inherit;
+  font-size: 1.15em;
+  font-weight: 600;
+  box-sizing: border-box;
+}
+
+.composer-title:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-focus);
+}
+
+.composer-body {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 8px;
+  background: var(--color-surface-2);
+  color: var(--color-text);
+  font-family: "EB Garamond", Georgia, serif;
+  font-size: 1.1em;
+  line-height: 1.7;
+  resize: vertical;
+  min-height: 300px;
+  box-sizing: border-box;
+}
+
+.composer-body:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-focus);
+}
+
+.composer-error {
+  color: var(--color-danger);
+  font-size: 0.9em;
+  margin: 0;
+}
+
+.composer-status-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.composer-badge {
+  font-size: 0.75em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+.composer-badge-draft {
+  background: var(--color-surface-2);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border-strong);
+}
+
+.composer-badge-published {
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary-border);
+}
+
+.composer-saved {
+  font-size: 0.82em;
+  color: var(--color-text-faint);
+  font-style: italic;
+}
+
+.composer-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.composer-publish-btn {
+  background: var(--color-primary-solid);
+  color: var(--color-on-primary);
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95em;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.composer-publish-btn:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+  transform: translateY(-1px);
+}
+
+.composer-publish-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.composer-confirm {
+  margin-top: 12px;
+  padding: 18px 20px;
+  background: var(--color-primary-soft);
+  border: 1px solid var(--color-primary-border);
+  border-radius: 10px;
+}
+
+.composer-confirm p {
+  margin: 0 0 14px;
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+.composer-confirm-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+body {
+  transition:
+    padding-right 250ms ease,
+    padding-left 250ms ease;
+}
+
+@media (min-width: 900px) {
+  body.composer-open {
+    padding-right: 520px;
+  }
+}
+
+.teachings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.teachings-eyebrow {
+  color: var(--color-primary);
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin: 0 0 6px;
+  font-weight: 700;
+}
+
+.teachings-intro {
+  color: var(--color-text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.teachings-empty {
+  text-align: center;
+  padding: 50px 20px;
+  color: var(--color-text-muted);
+  font-style: italic;
+  line-height: 1.7;
+}
+
+.teachings-section {
+  margin-bottom: 28px;
+}
+
+.teachings-section-title {
+  font-size: 1.05em;
+  color: var(--color-text);
+  margin: 0 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.teachings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.teaching-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  flex-wrap: wrap;
+}
+
+.teaching-row-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+.teaching-row-title {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.teaching-row-date {
+  font-size: 0.82em;
+  color: var(--color-text-faint);
+}
+
+.teaching-badge {
+  font-size: 0.7em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 3px 9px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.teaching-badge-draft {
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border-strong);
+}
+
+.teaching-badge-published {
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary-border);
+}
+
+.teaching-row-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.feed-wrapper {
+  max-width: 760px;
+  margin: 40px auto 0;
+  padding: 0 24px 80px;
+}
+
+.feed-heading {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.feed-heading h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  margin-bottom: 12px;
+}
+
+.feed-status {
+  text-align: center;
+  color: var(--color-text-muted);
+  font-style: italic;
+  padding: 40px 20px;
+}
+
+.feed-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.post-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 24px 28px;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+
+.post-card:hover {
+  border-color: var(--color-primary-border);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.post-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 0.85em;
+}
+
+.post-card-author {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.post-card-date {
+  color: var(--color-text-faint);
+}
+
+.post-card-title {
+  font-size: 1.35em;
+  margin: 0 0 10px;
+  color: var(--color-text);
+  line-height: 1.3;
+}
+
+.post-card-preview {
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin: 0 0 14px;
+  white-space: pre-wrap;
+}
+
+.post-card-readmore {
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 0.9em;
+}
+
+/* Single post view */
+.post-view {
+  max-width: 720px;
+}
+
+.post-back {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  cursor: pointer;
+  font-size: 0.95em;
+  font-weight: 600;
+  padding: 0;
+  margin-bottom: 24px;
+}
+
+.post-back:hover {
+  color: var(--color-primary-hover);
+}
+
+.post-full-header {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.post-full-header h1 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  margin: 0 0 16px;
+  line-height: 1.2;
+}
+
+.post-full-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.95em;
+}
+
+.post-full-author {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.post-full-date {
+  color: var(--color-text-faint);
+}
+
+.post-full-body {
+  font-family: "EB Garamond", Georgia, serif;
+  font-size: 1.2em;
+  line-height: 1.85;
+  color: var(--color-text);
+  white-space: pre-wrap;
+}
